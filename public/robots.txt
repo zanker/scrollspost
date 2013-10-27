@@ -1,0 +1,4 @@
+Sitemap: http://www.scrollspost.com/sitemap.xml
+
+User-agent: *
+Disallow: /replay/download/

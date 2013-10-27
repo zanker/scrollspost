@@ -1,0 +1,87 @@
+@import "bootstrap/variables.less";
+@import "bootstrap/mixins.less";
+
+#cards_show {
+  .game-card {
+    margin-top: 20px;
+  }
+
+  #info {
+    margin-left: 10px;
+
+    .well {
+      padding: 0;
+    }
+
+    .diff {
+      font-size: 105%;
+
+      .version {
+        display: inline-block;
+        width: 60px;
+        text-align: right;
+        margin-right: 4px;
+      }
+
+      .old {
+        margin-bottom: 4px;
+
+        .version {
+          color: lighten(@red, 10%);
+        }
+      }
+
+      .new {
+        .version {
+          color: @green;
+        }
+      }
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+
+      li {
+        margin: 4px 0 4px 0;
+        padding: 4px 0 4px 0;
+        border-top: 1px solid black;
+
+        &:first-child {
+          border-top: 0;
+        }
+
+        .label, .text {
+          display: inline-block;
+          vertical-align: top;
+        }
+
+        .label {
+          color: @gold;
+          width: 100px;
+          text-align: right;
+          margin-right: 8px;
+        }
+
+        .text {
+          width: 450px;
+        }
+
+        .resources {
+          margin-right: 6px;
+        }
+
+      }
+    }
+  }
+
+  #history {
+    width: 248px;
+
+    table {
+      .changes, .view, .version {
+        text-align: center;
+      }
+    }
+  }
+}

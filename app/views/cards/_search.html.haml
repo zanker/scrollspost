@@ -1,0 +1,60 @@
+.row#search
+  .span12
+    .well.well-small.well-trimmed
+      .span12
+        #resources.btn-group
+          - Card::RESOURCE_MAP.each_key do |resource|
+            %button.btn.btn-inverse{:class => @filters[:resources][resource] ? :active : nil, "data-key" => resource}
+              .resources.size-28{:class => "resource-#{resource}"}
+
+        #rarities.btn-group
+          - Card::RARITY_MAP.each do |id, rarity|
+            %button.btn.btn-inverse{:class => @filters[:rarities][id] ? :active : nil, "data-key" => rarity}
+              %span{:class => "rarity-#{id}"}
+                = t("short_rarities.#{rarity}")
+
+
+        #rules.dropdown
+          %a.dropdown-toggle{"data-toggle" => :dropdown, :href => "#"}>
+            %span
+              #{t(".rules_prefix")}
+              %span #{t("all")}
+            %strong.caret
+          %ul.dropdown-menu
+            %li{:class => !@filters[:rule_id] ? :active : nil}
+              %a{:href => "#", "data-key" => "all", "data-prefix" => t(".rules_prefix")}= t("all")
+
+            - @rules.each do |rule_id, rule|
+              %li{:class => @filters[:rule_id] == rule_id ? :active : nil}
+                %a{:href => "#", "data-key" => rule[:slug], "data-prefix" => t(".rule_prefix")}= rule[:name].titleize
+
+
+        #categories.dropdown
+          %a.dropdown-toggle{"data-toggle" => :dropdown, :href => "#"}
+            %span
+              #{t(".categories_prefix")}
+              %span #{t("all")}
+            %strong.caret
+          %ul.dropdown-menu
+            %li{:class => !@filters[:category_id] ? :active : nil}
+              %a{:href => "#", "data-key" => "all", "data-prefix" => t(".categories_prefix")}= t("all")
+
+            - @categories.each do |category_id, category|
+              %li{:class => @filters[:category_id] == category_id ? :active : nil}
+                %a{:href => "#", "data-key" => category[:slug], "data-prefix" => t(".category_prefix")}= category[:name].titleize
+
+      .clearfix
+
+
+      .span12
+        %form{:action => cards_index_path}
+          - [:cost, :hp, :cd, :atk].each do |type|
+            %div{:id => type}
+              %label= t(".#{type}_full", :default => t(".#{type}"))
+              %input{:type => :text, :value => params["min_#{type}"], :placeholder => "0", :maxlength => 1}
+              %label.div -
+              %input{:type => :text, :value => params["max_#{type}"], :placeholder => "9", :maxlength => 1}
+
+          %input.btn.btn-success{:type => :submit, :value => t(".search"), "data-loading-text" => t(".searching")}
+
+      .clearfix

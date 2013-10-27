@@ -1,0 +1,36 @@
+.row
+  .span12
+    %h3.header= t(".register")
+
+.row
+  .span12
+    .well.well-small.well-trimmed
+      %p.emph= linkify_text(t(".register_features_1"), faq_index_path(:anchor => "1"))
+      %p.emph= t(".register_features_2")
+      %p.emph= linkify_text(t(".register_features_3"), new_sessions_path)
+
+  .span12
+    .well.well-small
+      #error-list
+      = form_for @user, :url => {:action => :create}, :html => {:class => "form-horizontal"} do |f|
+        .control-group
+          = f.label(:email, :class => "control-label")
+          .controls
+            = f.email_field(:email, :class => "input-large")
+            %span.help-inline
+              = t(".email_no_spam")
+
+        .control-group
+          = f.label(:password, :class => "control-label")
+          .controls
+            = f.password_field(:password, :class => "input-medium")
+            %span.help-inline= t(".password_desc")
+
+        .control-group
+          = f.label(:password_confirmation, :class => "control-label")
+          .controls
+            = f.password_field(:password_confirmation, :class => "input-medium")
+            %span.help-inline= t(".password_confirm_desc")
+
+        %input.btn.btn-success{:type => :submit, :value => t(".create"), "data-loading-text" => t(".creating")}
+

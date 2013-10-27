@@ -1,0 +1,23 @@
+.row
+  .span12
+    %h3.header= t(".last_24", :title => t(".#{params[:action]}.title"))
+
+.row
+  .span12
+    .well.well-small.well-trimmed
+      #graph-day
+
+.row
+  .span12
+    %h3.header= t(".last_week", :title => t(".#{params[:action]}.title"))
+
+.row
+  .span12
+    .well.well-small.well-trimmed
+      #graph-week
+
+
+:javascript
+  var stats_day = #{@stats_day};
+  var stats_week = #{@stats_week};
+  var plot_bands = #{@bands};

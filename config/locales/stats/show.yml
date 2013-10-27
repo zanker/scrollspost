@@ -1,0 +1,14 @@
+en:
+  stats:
+    show:
+      last_24: "%{title} (Last 24 hours)"
+      last_week: "%{title} (Last 7 Days)"
+
+      online:
+        title: Total Online
+      total_cards:
+        title: Total Cards in Circulation
+      total_sold:
+        title: Total Scrolls Sold
+      total_gold:
+        title: Total Gold Earned

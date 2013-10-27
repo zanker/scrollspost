@@ -1,0 +1,188 @@
+- if !current_user.scroll_accounts.exists?
+  .row
+    .span12
+      .alert.alert-error
+        .close x
+        %strong
+          %p= t(".no_account_found_1")
+          %p= linkify_text(t(".no_account_found_2"), faq_index_path(:anchor => "1"))
+
+- elsif @inventory.empty?
+  .row
+    .span12
+      .alert.alert-error
+        .close x
+        %strong
+          %p= t(".no_cards_found_1")
+          %p= linkify_text(t(".no_cards_found_2"), faq_index_path(:anchor => "1"), [:email, CONFIG[:contact][:email]])
+
+- else
+  - unless current_user.scroll_accounts.first.public?
+    .alert.alert-error
+      .close x
+      %strong= linkify_text(t(".not_public"), edit_usercp_settings_path)
+
+  .row
+    .span12
+      %h3.header= t(".store_management")
+
+
+  .row
+    .span12#quick-menu
+      %ul.nav.nav-tabs
+        %li.active= link_to(t(".auto_price"), "#auto-price", "data-target" => "#tab-auto-price")
+        %li= link_to(t(".auto_quantity"), "#auto-quantity", "data-target" => "#tab-auto-quantity")
+
+        %li.pull-right#saving{"data-path" => usercp_cards_path}
+          = image_tag("loading.gif")
+          %span= t(".saving_changes")
+
+      .tab-content
+        .tab-pane.active#tab-auto-price
+          %form{:action => pricing_usercp_cards_path}
+            %label= t(".price_using")
+
+            #period.dropdown
+              %a.dropdown-toggle{"data-toggle" => :dropdown, :href => "#"}>
+                %span{"data-prefix" => t(".last")}
+                  = t(".last")
+                  %span #{t("stat_period.d1").capitalize}
+                %strong.caret
+              %ul.dropdown-menu
+                - PricingController::STAT_PERIOD.each do |type, key|
+                  %li{:class => key == "d1" ? :active : nil}
+                    %a{:href => "#", "data-key" => type}= t("stat_period.#{key}").capitalize
+
+            %label= t(".of_price_data")
+
+            #percent
+              .input-append
+                %input{:type => :text, :value => "0", :placeholder => "0", :maxlength => 4}
+                %span.add-on %
+
+            %label= t(".to_the_price")
+
+            %input.btn.btn-success.btn-small.pull-right{:type => :submit, :value => t(".update"), "data-loading-text" => t(".updating")}
+            .clearfix
+
+
+        .tab-pane#tab-auto-quantity
+          %form
+            %label= t(".automatically")
+
+            #buy-quantity.dropdown
+              %a.dropdown-toggle{"data-toggle" => :dropdown, :href => "#"}>
+                %span{"data-prefix" => t(".list_buy")}
+                  = t(".list_buy")
+                  %span #{t(".ignore")}
+
+                %strong.caret
+              %ul.dropdown-menu
+                %li.active= link_to(t(".ignore"), "#", "data-key" => "")
+                %li= link_to(t(".zero_out"), "#", "data-key" => "zero")
+                %li.divider
+                %li= link_to(t(".three_of"), "#", "data-key" => "3-all")
+                %li= link_to(t(".two_of"), "#", "data-key" => "2-all")
+                %li.divider
+                %li= link_to(t(".three_of_have"), "#", "data-key" => "3-have")
+                %li= link_to(t(".two_of_have"), "#", "data-key" => "2-have")
+                %li.divider
+                %li= link_to(t(".three_of_missing"), "#", "data-key" => "3-miss")
+                %li= link_to(t(".two_of_missing"), "#", "data-key" => "2-miss")
+                %li= link_to(t(".one_of_missing"), "#", "data-key" => "1-miss")
+                -#%li.divider
+                -#%li= link_to(t(".three_of_deck"), "#", "data-key" => "3-deck")
+                -#%li= link_to(t(".two_of_deck"), "#", "data-key" => "2-deck")
+
+            #sell-quantity.dropdown
+              %a.dropdown-toggle{"data-toggle" => :dropdown, :href => "#"}>
+                %span{"data-prefix" => t(".list_sell")}
+                  = t(".list_sell")
+                  %span #{t(".ignore")}
+
+                %strong.caret
+              %ul.dropdown-menu
+                %li.active= link_to(t(".ignore"), "#", "data-key" => "")
+                %li= link_to(t(".zero_out"), "#", "data-key" => "zero")
+                -#%li.divider
+                -#%li= link_to(t(".every_non_deck"), "#", "data-key" => "non-deck")
+                %li.divider
+                %li= link_to(t(".three_keep"), "#", "data-key" => "3-keep")
+                %li= link_to(t(".two_keep"), "#", "data-key" => "2-keep")
+                %li= link_to(t(".one_keep"), "#", "data-key" => "1-keep")
+
+            %input.btn.btn-success.btn-small.pull-right{:type => :submit, :value => t(".update"), "data-loading-text" => t(".updating")}
+            .clearfix
+
+
+  :javascript
+    var hash = window.location.hash.replace("#", "");
+    if( hash != "" && $("#tab-" + hash).length > 0 ) $("#usercp_cards_index").find(".nav-tabs li a[href='#" + hash + "']").tab("show");
+
+  .row
+    .span12
+      %table.table.table-bordered.table-hover.table-striped
+        %thead
+          %tr
+            %th.icon
+              &nbsp;
+            %th.name!= sort_header(t(".name"), "name")
+            %th.rarity!= sort_header(t(".rarity"), "rarity")
+            %th.resource!= sort_header(t(".resource"), "resource")
+            %th.quantity!= t(".quantity")
+            -#%th.quantity!= sort_header(t(".in_deck"), "deck-quantity")
+            %th.quantity!= t(".tradable")
+            %th.buy= t(".to_buy")
+            %th.sell= t(".to_sell")
+
+        %tbody
+          - @sorted_cards.each do |card|
+            - inventory = @inventory[card._id]
+
+            %tr{:class => (!inventory || inventory.quantity == 0) ? "missing" : nil, "data-card" => card._id, "data-quantity" => inventory ? inventory.quantity : 0, "data-deck" => inventory ? inventory.deck_quant : 0, "data-trade" => inventory ? inventory.trade_quant : 0}
+              %td.icon
+                = image_tag("cards/tiny-#{card.image_id}.png", :class => "cards size-tiny")
+              %td.name.card-tt{"data-name" => card.name, "data-card-id" => card.card_id}
+                = link_to(card.name, cards_path(card.card_id, card.name.parameterize))
+
+              %td.rarity
+                %span{:class => "rarity-#{card.rarity}"}= t("rarities.#{card.rarity}")
+
+              %td.resource
+                != card.costs.map {|type| "#{content_tag(:div, "", :class => "resources resource-#{type} size-28")}#{content_tag(:span, "#{card["cost_#{type}"]}")}"}.join(" / ")
+
+              %td.quantity= inventory ? number_with_delimiter(inventory.quantity) : "--"
+              -#%td.quantity= inventory ? number_with_delimiter(inventory.deck_quant) : "--"
+              %td.quantity= inventory ? number_with_delimiter(inventory.trade_quant) : "--"
+              %td.buy
+                %input.to-buy{:type => :text, :value => inventory ? inventory.buy_quant : nil, :placeholder => 0, :maxlength => 2, "data-key" => "buy-quantity"}
+                %label x
+                .input-append
+                  %input.buy-price{:type => :text, :value => inventory ? inventory.buy_price : nil, :placeholder => 0, :maxlength => 4, "data-key" => "buy"}
+                  %span.add-on= t(".gold_per")
+
+              %td.sell
+                - if inventory and inventory.quantity > 0
+                  %input.to-sell{:type => :text, :value => inventory.sell_quant, :placeholder => 0, :maxlength => 2, "data-key" => "sell-quantity"}
+                  %label x
+                  .input-append
+                    %input.sell-price{:type => :text, :value => inventory.sell_price, :placeholder => 0, :maxlength => 4, "data-key" => "sell"}
+                    %span.add-on= t(".gold_per")
+                - else
+                  = t(".na")
+
+          - if @sorted_cards.empty?
+            %tr
+              %td{:colspan => 9}
+                %span.text-error= t(".no_cards_found")
+
+#sync-failed.modal
+  .modal-header
+    %h3.text-error= t(".sync_failed")
+
+  .modal-body
+    %p= t(".unable_to_save_1")
+    %p= linkify_text(t(".unable_to_save_2"), [:email, CONFIG[:contact][:email]])
+
+  .modal-footer
+    %input.btn.pull-left{:type => :button, :value => t("js.dismiss"), "data-dismiss" => "modal"}

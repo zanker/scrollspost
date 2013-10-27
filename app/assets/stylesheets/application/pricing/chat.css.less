@@ -1,0 +1,64 @@
+@import "bootstrap/variables.less";
+@import "bootstrap/mixins.less";
+
+#pricing_chat {
+  table {
+    .icon {
+      width: 40px;
+    }
+
+    .resources {
+      margin-right: 6px;
+    }
+
+    .name {
+      width: 20%;
+      cursor: pointer;
+    }
+
+    .resource {
+      width: 9%;
+
+      div {
+        margin-right: 8px;
+      }
+
+      span {
+        font-size: 150%;
+        color: @gold;
+        vertical-align: middle;
+        position: relative;
+        top: -1px;
+      }
+    }
+
+    .rarity {
+      width: 11%;
+    }
+
+    .price {
+      width: 10%;
+    }
+
+    .type {
+      width: 8%;
+    }
+
+    .channel, .user {
+      width: 14%;
+    }
+
+    .age {
+      width: 10%;
+    }
+
+    td {
+      vertical-align: middle;
+    }
+
+    .icon, .resource, .price, .type, .rarity, .age {
+      vertical-align: middle;
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+en:
+  cards:
+    show_chat:
+      last_buys: "Last %{count} WTB (In-Game)"
+      last_sales: "Last %{count} WTS (In-Game)"
+      none_found: No logs found
+      channel: Channel
+      name: Name
+      price: Price
+      age: Age

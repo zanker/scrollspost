@@ -1,0 +1,110 @@
+.row#search
+  .span12
+    .well.well-small.well-trimmed
+      %form{:action => params[:id].blank? ? replays_path : replays_index_player_path}
+        #resources.btn-group
+          - Card::RESOURCE_MAP.each_key do |resource|
+            %a.btn.btn-inverse{:class => @filters[:resources][resource] ? :active : nil, "data-key" => resource}
+              .resources.size-28{:class => "resource-#{resource}"}
+
+        #type.dropdown
+          %a.dropdown-toggle{"data-toggle" => :dropdown, :href => "#"}
+            %span
+              #{t(".types_prefix")}
+              %span= t("all")
+            %strong.caret
+          %ul.dropdown-menu
+            %li{:class => !@filters[:type] ? :active : nil}
+              %a{:href => "#", "data-key" => "all", "data-prefix" => t(".types_prefix")}= t("all")
+            %li.divider
+
+            - ReplaysController::GAME_TYPES.each do |type, id|
+              %li{:class => @filters[:type] == id ? :active : nil}
+                %a{:href => "#", "data-key" => type, "data-prefix" => t(".type_prefix")}= t("short_game_types.#{id}")
+
+
+        #version.dropdown
+          %a.dropdown-toggle{"data-toggle" => :dropdown, :href => "#"}
+            %span
+              #{t(".versions_prefix")}
+              %span= t("all")
+            %strong.caret
+          %ul.dropdown-menu
+            %li{:class => !@filters[:version_id] ? :active : nil}
+              %a{:href => "#", "data-key" => "all", "data-prefix" => t(".versions_prefix")}= t("all")
+            %li.divider
+
+            - GameVersion.sort(:created_at.desc).only(:version).each do |version|
+              %li{:class => @filters[:version_id] == version._id ? :active : nil}
+                %a{:href => "#", "data-key" => version.version.parameterize, "data-prefix" => t(".version_prefix")}= t(".version", :version => version.version)
+
+
+        #rating
+          %label= t(".rating")
+          %input{:type => :text, :value => params["min_rating"], :placeholder => "0", :maxlength => 4}
+          %label.div -
+          %input{:type => :text, :value => params["max_rating"], :placeholder => "9999", :maxlength => 4}
+
+        %input.btn.btn-success{:type => :submit, :value => t(".search"), "data-loading-text" => t(".searching")}
+    .clearfix
+
+  :javascript
+    $("#replays_index").find(".dropdown").each(function(){ var active = $(this).find("ul.dropdown-menu li.active a"); $(this).find("a.dropdown-toggle span").html(active.data("prefix") + " <span>" + active.text() + "</span>"); });
+
+.row
+  .span12
+    %table.table.table-bordered.table-hover.table-striped
+      %thead
+        %tr
+          - unless @filters[:type]
+            %th.type= t(".type")
+
+          - (1..2).each do |id|
+            - if id == 2
+              %th.vs= t(".vs")
+
+            %th.name= t(".player_#{id}")
+            %th.deck= t(".player_#{id}_deck")
+            - if !@filters[:type] or @filters[:type] == Replay::MP_RANKED
+              %th.rating= t(".player_#{id}_rating")
+
+          %th.length= t(".length")
+          %th.age!= sort_header(t(".age"), "played")
+          %th.view= t(".view")
+
+      %tbody
+        - if @replays.empty?
+          %tr
+            %td{:colspan => 11}
+              %span.text-error= t(".no_replays_found")
+
+        - else
+          - @replays.each do |replay|
+            %tr
+              - unless @filters[:type]
+                %td.type= t("short_game_types.#{replay.game_type}")
+
+              - Replay::SIDE_MAP.each do |side, id|
+                - if id == Replay::BLACK
+                  %td.vs= t(".vs")
+
+                %td.name
+                  - if replay.perspective == id
+                    = link_to(t(".vp_tag"), faq_index_path(:anchor => "4"), :title => t(".viewpoint_desc"), :class => "tt vp-tag")
+
+                  - if !Replay::ROBOT_IDS[replay["#{side}_id"]]
+                    = link_to(replay["#{side}_name"], replays_index_player_path(replay["#{side}_id"].to_i(18).to_s(36), replay["#{side}_name"].parameterize))
+                  - else
+                    = t(".ai_names.#{replay["#{side}_id"]}")
+
+                %td.deck!= replay["#{side}_resources"].map {|type| "#{content_tag(:div, "", :class => "resources resource-#{type} size-16")}"}.join("")
+
+                - if !@filters[:type] or @filters[:type] == Replay::MP_RANKED
+                  %td.rating= replay["#{side}_rating"] ? number_with_delimiter(replay["#{side}_rating"]) : "--"
+
+              %td.length= relative_seconds(replay.game_length, :short)
+              %td.age= relative_time(replay.created_at, :short)
+              %td.view= link_to(t(".view"), show_replay_path(replay.game_id, replay.perspective, :name1 => replay.white_name.parameterize, :name2 => replay.black_name.parameterize))
+
+
+= build_pagination(@replays.count, CONFIG[:limits][:replays])

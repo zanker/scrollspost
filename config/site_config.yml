@@ -1,0 +1,35 @@
+---
+base: &base
+  domain: localhost:4000
+  full_domain: http://localhost:4000
+  mixpanel: secret
+  bcrypt_cost: 12
+
+  contact:
+    email: support@yourdomain.com
+
+  limits:
+    last_history: 15
+    news: 3
+    trade: 30
+    replays: 50
+
+  oauth:
+    facebook:
+      key: 'secret'
+      secret: 'secret'
+
+    google:
+      key: 'secret'
+      secret: 'secret'
+
+development: &development
+  <<: *base
+
+test: &test
+  <<: *base
+
+production: &production
+  <<: *base
+  domain: scrollspost.com
+  full_domain: http://www.scrollspost.com

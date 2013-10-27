@@ -1,0 +1,126 @@
+- content_for(:head) do
+  = javascript_include_tag(cards_tooltips_path(:format => :js, :webp => Thread.current[:use_webp] ? 1 : 0, :cachebust => Digest::MD5.hexdigest("#{Rails.cache.read("card-data-cache")}")[0, 10]), :async => true, :onload => "if( typeof(ScrollsPost) == 'object' ) { ScrollsPost.PAGES['deckbuilders/index/ready'](window.card_data); }".html_safe)
+
+.row#manage
+  .span12
+    .well.well-small.well-trimmed
+      .option
+        %label{:class => :tt, :title => t(".quick_card_controls_desc")}
+          %input#click-controls{:type => :checkbox, :value => "1", :checked => true}
+          %span
+            = t(".quick_card_controls")
+
+      .option
+        %label{:class => :tt, :title => t(".force_inventory_desc")}
+          %input#force-inventory{:type => :checkbox, :value => "1", :checked => false}
+          %span
+            = t(".force_inventory")
+
+      %a#toggle-search.btn.btn-small.pull-right{:href => "#"}= t("js.hide_search")
+      .clearfix
+
+.row#preview-search
+  .span3#preview
+    .game-card.show
+      .contents
+      .pending-contents
+
+  .span9#search-container
+    #search
+      .well.well-small.well-trimmed
+        #resources.btn-group
+          - Card::RESOURCE_MAP.each_key do |resource|
+            %button.btn.btn-inverse.active{"data-key" => resource}
+              .resources.size-28{:class => "resource-#{resource}"}
+
+        #rarities.btn-group
+          - Card::RARITY_MAP.each do |id, rarity|
+            %button.btn.btn-inverse.active{"data-key" => id}
+              %span{:class => "rarity-#{id}"}
+                = t("short_rarities.#{rarity}")
+
+
+        #rules.dropdown
+          %a.dropdown-toggle{"data-toggle" => :dropdown, :href => "#"}>
+            %span
+              #{t("cards.search.rules_prefix")}
+              %span #{t("all")}
+            %strong.caret
+          %ul.dropdown-menu
+            %li.active
+              %a{:href => "#", "data-key" => "all", "data-prefix" => t("cards.search.rules_prefix")}= t("all")
+            - @rules.each do |rule_id, rule|
+              %li
+                %a{:href => "#", "data-key" => rule[:slug], "data-prefix" => t("cards.search.rule_prefix")}= rule[:name].titleize
+
+        #categories.dropdown
+          %a.dropdown-toggle{"data-toggle" => :dropdown, :href => "#"}
+            %span
+              #{t("cards.search.categories_prefix")}
+              %span #{t("all")}
+            %strong.caret
+          %ul.dropdown-menu
+            %li.active
+              %a{:href => "#", "data-key" => "all", "data-prefix" => t("cards.search.categories_prefix")}= t("all")
+            - @categories.each do |category_id, category|
+              %li
+                %a{:href => "#", "data-key" => category_id, "data-prefix" => t("cards.search.category_prefix")}= category[:name].titleize
+
+        #name
+          %input{:type => :text, :placeholder => t("scroll_placeholder")}
+
+    .clearfix
+
+    #cards
+      .well.well-small.well-trimmed
+        #no-cards.text-error= t(".refine_filter")
+        %ul
+
+.row#expanded
+  .span2#summary
+    .well.well-small.well-trimmed
+      %dl.dl-horizontal
+        %dt= t(".total_cost")
+        %dd.total-cost
+          0#{content_tag(:span, t("gold_suffix"), :class => :gold)}
+        %dt= t(".avg_cost")
+        %dd.avg-cost
+          0#{content_tag(:span, t("gold_suffix"), :class => :gold)}
+        %dt.pad
+        %dd.pad
+        %dt= t(".total_cards")
+        %dd.total-cards 0
+        - Card::CATEGORY_MAP.each do |key, id|
+          %dt= t("categories.#{key}").pluralize
+          %dd.category{"data-category" => id} 0
+
+
+  .span10#deck
+    .well.well-small.well-trimmed
+      #deck-empty.text-error= t(".no_deck_cards")
+
+#loading.modal.hidden
+  = image_tag("loading.gif")
+  = t(".loading")
+
+#mod-required.modal.hidden
+  .modal-header
+    %h3.text-error= t(".no_data_mod")
+
+  .modal-body
+    %p.emph= t(".need_data_or_mod")
+    %p.emph= linkify_text(t(".download_mod"), faq_index_path(:anchor => "1"))
+    %p.emph= t(".auto_sync_mod")
+    %p.emph= linkify_text(t(".issues_contact"), [:email, CONFIG[:contact][:email]])
+
+  .modal-footer
+    %input.btn.pull-left{:type => :button, :value => t("js.dismiss"), "data-dismiss" => "modal"}
+
+
+:javascript
+  if( window.location.hash != "" ) {
+    $("#preview-search").hide();
+    $("#toggle-search").text(I18n.t("js.show_search"));
+  }
+
+  var card_inventory = #{@card_list.empty? ? "null" : @card_list.to_json};

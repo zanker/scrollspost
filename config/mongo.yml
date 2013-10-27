@@ -1,0 +1,18 @@
+defaults: &defaults
+  host: 127.0.0.1
+  port: 27017
+  options:
+    :pool_size: <%= RUBY_PLATFORM == "java" ? 30 : 1 %>
+    :pool_timeout: <%= RUBY_PLATFORM == "java" ? 30.0 : 5.0 %>
+
+development:
+  <<: *defaults
+  database: scrollspost_development
+
+test:
+  <<: *defaults
+  database: scrollspost_test
+
+production: &production
+  <<: *defaults
+  database: scrollspost_production

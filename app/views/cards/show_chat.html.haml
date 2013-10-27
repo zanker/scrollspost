@@ -1,0 +1,27 @@
+= render_block("show_base") do
+  - [[:last_buys, @last_buys], [:last_sales, @last_sales]].each do |key, list|
+    .span4
+      %h4.gold= t(".#{key}", :count => CONFIG[:limits][:last_history])
+      .well.well-small.well-trimmed
+        %table.table.table-bordered.table-hover.table-striped
+          %thead
+            %tr
+              %th.room= t(".channel")
+              %th.name= t(".name")
+              %th.price= t(".price")
+              %th.age= t(".age")
+          %tbody
+            - if list.empty?
+              %tr
+                %td{:colspan => 4}= t(".none_found")
+
+            - else
+              - list.each do |log|
+                %tr
+                  %td.room= log[:room]
+                  %td.name= log[:from]
+                  %td.price.gold
+                    #{number_with_delimiter(log[:price])}#{t("gold_suffix")}
+                  %td.age= relative_time(log[:created_at], :short)
+
+  .clearfix

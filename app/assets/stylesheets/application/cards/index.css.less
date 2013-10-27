@@ -1,0 +1,70 @@
+@import "bootstrap/variables.less";
+@import "bootstrap/mixins.less";
+
+#cards_index {
+  table {
+    td {
+      vertical-align: middle;
+    }
+
+    .icon {
+      width: 40px;
+    }
+
+    .name {
+      width: 22%;
+      cursor: pointer;
+    }
+
+    .rarity {
+      width: 12%;
+      text-align: center;
+    }
+
+    .type {
+      width: 12%;
+    }
+
+    .resource {
+      width: 10%;
+
+      div {
+        margin-right: 8px;
+      }
+
+      span {
+        font-size: 150%;
+        color: @gold;
+        vertical-align: middle;
+        position: relative;
+        top: -1px;
+      }
+    }
+
+    .atk, .cd, .hp {
+      width: 7%;
+    }
+
+    td.atk, td.cd, td.hp {
+      font-size: 140%;
+      color: @gold;
+
+      &.na {
+        color: @white;
+        font-size: @baseFontSize;
+      }
+    }
+
+    .rules {
+      width: 18%;
+    }
+
+    .version {
+      width: 5%;
+    }
+
+    .hp, .cd, .atk, .resource, .version {
+      text-align: center;
+    }
+  }
+}

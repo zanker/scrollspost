@@ -1,0 +1,17 @@
+en:
+  cards:
+    index:
+      name: Name
+      resource: Cost
+      rarity: Rarity
+      type: Type
+      atk: Atk
+      cd: CD
+      hp: HP
+      rules: Rules
+      atk_full: Attack
+      cd_full: Cooldown
+      attack: Atk
+      cooldown: CD
+      hp: HP
+      last_updated: Updated

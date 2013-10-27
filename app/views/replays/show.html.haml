@@ -1,0 +1,251 @@
+.row
+  .span3#info
+    .well.well-small.well-trimmed
+      %ul
+        %li
+          .label= t(".type")
+          .text= t("short_game_types.#{@replay.game_type}")
+
+        %li
+          .label= t(".length")
+          .text= relative_seconds(@replay.game_length)
+
+        %li
+          .label= t(".rounds")
+          .text= (@replay.game_rounds.to_f / 2).round
+
+        %li
+          .label= t(".round_timer")
+          .text= !@replay.difficulty? ? t("seconds", :count => @replay.game_timer) : t(".infinite")
+
+        %li
+          .label= t(".version")
+          .text= GameVersion.id_to_version(@replay.game_version_id)
+
+        %li
+          .label!= t(".perspective", :help => link_to("[?]", faq_index_path(:anchor => "4"), :title => t(".perspective_desc"), :class => :tt))
+          .text
+            - side = @replay.perspective == Replay::WHITE ? "white" : "black"
+            = link_to(@replay["#{side}_name"], replays_index_player_path(@replay["#{side}_id"].to_i(18).to_s(36), @replay["#{side}_name"].parameterize))
+
+        -#%li
+        -#  .label= t(".downloads")
+        -#  .text= number_with_delimiter(@replay.downloads || 0)
+
+        %li
+          .label= t(".view")
+          .text#downloads
+            = link_to(t(".download"), download_replay_path(@replay.game_id, @replay.perspective, :format => "spr"), :title => "#{t(".recommended")}<br>#{t(".format_sp_desc")}", :class => :tt)
+            \/
+            = link_to(t(".in_game_url"), "#")
+
+  .span7#summary
+    .well.well-small.well-trimmed
+      - Replay::SIDE_MAP.each do |side, side_id|
+        - if side_id == Replay::BLACK
+          .span3.side-list
+            %ul
+              %li= t(".result")
+              %li= t(".name")
+              %li= t(".deck_links")
+              %li.deck-type= t(".deck_type")
+              %li= t(".resources")
+              %li= t(".time_taken")
+              %li= t(".rating")
+              %li= t(".cards_sac_draw")
+              %li= t(".cards_sac_resources")
+
+        .span2.side-info{:class => "side-#{side}"}
+          %ul
+            %li
+              .text
+                %span.nospoiler= link_to(t(".show_spoiler"), "#", :class => "show-spoilers")
+                - if @replay.winner == side_id
+                  %span.spoiler.text-success= t(".winner")
+                - else
+                  %span.spoiler.text-error
+                    = @replay.surrender? ? t(".surrendered") : t(".loser")
+
+              .clearfix
+
+            %li
+              .text
+                - if !Replay::ROBOT_IDS[@replay["#{side}_id"]]
+                  = link_to(@replay["#{side}_name"], replays_index_player_path(@replay["#{side}_id"].to_i(18).to_s(36), @replay["#{side}_name"].parameterize))
+                - else
+                  = @replay["#{side}_name"]
+              .clearfix
+
+            %li
+              .text
+                - if !Replay::ROBOT_IDS[@replay["#{side}_id"]]
+                  = link_to(t(".view_deck"), deckbuilder_path(:anchor => ""), :class => :tt, :title => t(".deck_reconstruct"), :id => "deck-#{side}")
+                - else
+                  \---
+              .clearfix
+
+            %li.deck-resources
+              .text!= @replay["#{side}_resources"].map {|type| "#{content_tag(:div, "", :class => "resources resource-#{type} size-28")}"}.join("")
+              .clearfix
+
+            %li.final-resources
+              .text!= @replay["#{side}_res_totals"].map {|type, total| "#{content_tag(:div, total, :class => "resource-#{type}")}"}.join("")
+              .clearfix
+
+            %li
+              .text= relative_seconds(@replay["#{side}_time"])
+              .clearfix
+
+            %li
+              .text
+                - if !@replay.ranked?
+                  = t(".na")
+                - else
+                  %span.nospoiler= link_to(t(".show_spoiler"), "#", :class => "show-spoilers")
+                  %span.spoiler
+                    = number_with_delimiter(@replay["#{side}_rating"])
+                    = surround "(", ")" do
+                      - if @replay["#{side}_rate_chg"] < 0
+                        %span.text-error= number_with_delimiter(@replay["#{side}_rate_chg"])
+                      - elsif @replay["#{side}_rate_chg"] > 0
+                        %span.text-success +#{number_with_delimiter(@replay["#{side}_rate_chg"])}
+                      - else
+                        = number_with_delimiter(@replay["#{side}_rate_chg"])
+
+              .clearfix
+
+            %li
+              .text= number_with_delimiter(@replay["#{side}_sac_cards"])
+              .clearfix
+
+            %li
+              .text= number_with_delimiter(@replay["#{side}_sac_res"])
+              .clearfix
+
+  .span7#stats-summary
+    .well.well-small.well-trimmed
+      - Replay::SIDE_MAP.each do |side, side_id|
+        - if side_id == Replay::BLACK
+          .span3.side-list
+            %ul
+              %li= t(".cards_drawn")
+              %li= t(".unit_dmg")
+              %li= t(".idol_dmg")
+              %li= t(".units_played")
+              %li= t(".spells_played")
+              %li= t(".enchant_played")
+              %li= t(".idols_killed")
+              %li= t(".most_dmg_unit")
+
+        .span2.side-info{:class => "side-#{side}"}
+          %ul
+            - ["drawn", "udmg", "idmg", "uplay", "splay", "eplay", "ikill", "hdmg"].each do |key|
+              %li
+                .text
+                  - if key == "udmg" or key == "idmg" or key == "ikill"
+                    %span.spoiler= number_with_delimiter(@replay["#{side}_stats"][key])
+                    %span.nospoiler= t(".spoiler")
+                  - elsif key == "hdmg"
+                    %span.spoiler
+                      %span.number= number_with_delimiter(@replay["#{side}_stats"][key])
+                      - if @replay["#{side}_stats"]["hdmgID"]
+                        - card = @cards[@replay["#{side}_stats"]["hdmgID"]]
+                        = link_to(t(".view_unit"), cards_path(card.card_id, card.name.parameterize), :class => "card-tt", "data-card-id" => card.card_id)
+
+
+                    %span.nospoiler= t(".spoiler")
+
+                  - else
+                    = number_with_delimiter(@replay["#{side}_stats"][key])
+
+                .clearfix
+
+
+.row
+  .span12
+    %ul.nav.nav-tabs
+      %li{:class => params[:page_type].blank? ? :active : nil}= link_to(t(".card_summary"), show_replay_path(@replay.game_id, @replay.perspective, :page_type => nil, :name1 => @replay.white_name.parameterize, :name2 => @replay.black_name.parameterize))
+      %li{:class => params[:page_type] == "damage" ? :active : nil}= link_to(t(".damage_graph"), show_replay_path(@replay.game_id, @replay.perspective, :page_type => "damage", :name1 => @replay.white_name.parameterize, :name2 => @replay.black_name.parameterize))
+
+    .tab-content
+      - if params[:page_type].blank?
+        .tab-pane#card-summary.active
+          - Replay::SIDE_MAP.each do |side, side_id|
+            .span6{:class => "side-#{side}"}
+              %h4.gold= t(".player_card_summary", :name => @replay["#{side}_name"])
+              .well.well-small.well-trimmed
+                %table.table.table-bordered.table-hover.table-striped
+                  %thead
+                    %tr
+                      %th.icon
+                      %th.name= t(".name")
+                      %th.resource= t(".cost")
+                      %th.played= t(".played")
+                  %tbody
+                    - records = summarize_cards(@replay["#{side}_rounds"])
+                    - if records.empty?
+                      %tr
+                        %td.center{:colspan => 4}
+                          %span.text-error= t(".no_cards_played")
+
+                    - else
+                      - records.each do |record|
+                        - card = @cards[record[:card_id]]
+                        %tr
+                          %td.icon
+                            = image_tag("cards/tiny-#{card.image_id}.png", :class => "cards size-tiny")
+                          %td.name.card-tt{"data-name" => card.name, "data-card-id" => card.card_id}
+                            %span{:class => "rarity-#{card.rarity}"}= link_to(card.name, cards_path(card.card_id, card.name.parameterize))
+                          %td.resource
+                            != card.costs.map {|type| "#{content_tag(:div, "", :class => "resources resource-#{type} size-28")}#{content_tag(:span, "#{card["cost_#{type}"]}")}"}.join(" / ")
+                          %td.played= number_with_delimiter(record[:played])
+
+
+      - elsif params[:page_type] == "damage"
+        :javascript
+          ScrollsPost.graphs = {};
+
+        .tab-pane#damage-chart.active
+          - Replay::SIDE_MAP.each do |side, side_id|
+            .span12{:class => "side-#{side}"}
+              %h4.gold= t(".player_damage", :name => @replay["#{side}_name"])
+              .well.well-small.well-trimmed
+                .cards-played
+                  %span{"data-text" => t(".cards_played_turn")}= t(".cards_played_turn").gsub("{number}", "1")
+                  %ul
+
+                %div.graph{:id => "graph-#{side}", "data-side" => side}
+
+            :javascript
+              ScrollsPost.graphs.#{side} = #{build_damage_graph(@replay, side)};
+
+      .clearfix
+
+#replay-info.modal.hidden
+  .modal-header
+    %h3.text-success= t(".replay_downloading")
+
+  .modal-body
+    %p.emph= linkify_text(t(".your_download_start"), faq_index_path(:anchor => "2"))
+    %p.emph= t(".download_mod")
+    %p.emph= linkify_text(t(".issues_contact"), [:email, CONFIG[:contact][:email]])
+
+  .modal-footer
+    %input.btn.pull-left{:type => :button, :value => t("js.dismiss"), "data-dismiss" => "modal"}
+
+
+#replay-url.modal.hidden
+  .modal-header
+    %h3= t(".replay_url")
+
+  .modal-body
+    %p.emph= linkify_text(t(".replay_url_info"), faq_index_path(:anchor => "2"))
+    %p.emph= t(".url_mod")
+    %input.input-full{:type => :text, :value => request.url}
+    %p.emph= linkify_text(t(".issues_contact"), [:email, CONFIG[:contact][:email]])
+
+  .modal-footer
+    %input.btn.pull-left{:type => :button, :value => t("js.dismiss"), "data-dismiss" => "modal"}
+
+:javascript
+  var card_summary = #{deck_summary(@replay).to_json};

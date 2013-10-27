@@ -1,0 +1,33 @@
+en:
+  replays:
+    index:
+      search: Search
+      searching: Searching...
+      types_prefix: "Game Types:"
+      type_prefix: "Game Type:"
+      rating: Rating
+      no_replays_found: No Replays Found
+      player_1: Player 1
+      player_2: Player 2
+      player_1_deck: Deck
+      player_1_rating: Rating
+      player_2_deck: Deck
+      player_2_rating: Rating
+      type: Type
+      all: All
+      perspective: Viewpoint
+      versions_prefix: "Versions:"
+      version_prefix: "Version:"
+      version: "%{version}"
+      view: View
+      age: Age
+      vp_tag: "[VP]"
+      viewpoint_desc: "[VP] shows who recorded the match, letting you see their entire hand throughout the game."
+      vs: Vs
+      length: Length
+
+      ai_names:
+        RobotEasy: Easy AI
+        RobotMedium: Medium AI
+        RobotHard: Hard AI
+        RobotTower: Trial AI

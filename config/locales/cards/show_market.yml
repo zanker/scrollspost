@@ -1,0 +1,6 @@
+en:
+  cards:
+    show_market:
+      buy_stats: Buy Stats (Last %{days} days)
+      sell_stats: Sell Stats (Last %{days} days)
+      unit_stats: Unit Stats (Last %{days} days)

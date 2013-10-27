@@ -1,0 +1,24 @@
+en:
+  pricing:
+    index:
+      name: Name
+      sell_price: Sell Price
+      buy_price: Buy Price
+      sug_price: Sug. Price
+      buy_seen: Buy Pop.
+      sell_seen: Sell Pop.
+      type: Type
+      cost: Cost
+      last_seen: Last Seen
+      no_cards_found: Sorry, we couldn't find any scrolls.
+      all_resources: All Resources
+      all_rarities: All Rarities
+      last: Last
+      rarity: Rarity
+      updated: Updated
+      last_days: "Last %{days} days"
+      search: Search
+      searching: Searching...
+      category_prefix: "Category:"
+      categories_prefix: "Categories:"
+      last_prefix: "Last:"

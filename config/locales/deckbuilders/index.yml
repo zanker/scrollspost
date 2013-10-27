@@ -1,0 +1,22 @@
+en:
+  deckbuilders:
+    index:
+      loading: Loading...
+      toggle_search: Toggle Search
+      refine_filter: We could not find any cards with the given criteria.
+      auto_align: Auto Align
+      quick_card_controls: Use Mouse Click Controls
+      quick_card_controls_desc: When enabled, uses Left click to add cards and Right click to remove. Otherwise, cards are managed by dragging.
+      no_deck_cards: No cards have been added to the deck yet
+      controls_drag: Drag cards to manage the deck
+      controls_click: Left click to add, Right click to remove cards
+      total_cost: Deck Cost
+      avg_cost: Avg Cost
+      total_cards: Total Cards
+      force_inventory: Restrict to In-Game Inventory
+      force_inventory_desc: Restricts the deck builder to only show cards you have in-game, as well as not allowing you to create a deck with more of a single card than you own.
+      no_data_mod: No Inventory Data Found
+      need_data_or_mod: To use this feature, you must have the ScrollsPost mod, as well as an account on ScrollsPost.
+      download_mod: Downloading the mod is easy, {click here} for more info. Once the mod is installed, you can create a ScrollsPost account in-game in a minute, then go to the Deck Builder in-game and your collection will auto sync!
+      auto_sync_mod: After that, the mod will automatically sync your inventory to ScrollsPost. Letting you always use the most up to date info to build your decks.
+      issues_contact: If you run into any problems, or have any questions. Just {send us an email} and will help you out.

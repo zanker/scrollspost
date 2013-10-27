@@ -1,0 +1,64 @@
+@import "bootstrap/variables.less";
+@import "bootstrap/mixins.less";
+
+#pricing_store {
+  #search {
+    input[type='submit'] {
+      position: relative;
+      top: 4px;
+    }
+  }
+
+  table {
+    .icon {
+      width: 40px;
+    }
+
+    .resources {
+      margin-right: 6px;
+    }
+
+    .name {
+      width: 22%;
+      cursor: pointer;
+    }
+
+    .resource {
+      width: 12%;
+    }
+
+    td.resource {
+      div {
+        margin-right: 8px;
+      }
+
+      span {
+        font-size: 150%;
+        color: @gold;
+        vertical-align: middle;
+        position: relative;
+        top: -1px;
+      }
+    }
+
+    .rarity {
+      width: 12%;
+    }
+
+    .price {
+      width: 10%;
+    }
+
+    .quantity {
+      width: 14%;
+    }
+
+    td {
+      vertical-align: middle;
+    }
+
+    .icon, .price, .rarity, .quantity, .resource {
+      text-align: center;
+    }
+  }
+}

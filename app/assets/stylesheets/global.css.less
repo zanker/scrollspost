@@ -1,0 +1,554 @@
+@import "bootstrap/variables.less";
+@import "bootstrap/mixins.less";
+
+.wrapper > .navbar {
+  margin-bottom: 10px;
+}
+
+.gabagt {
+  margin: auto;
+  width: 970px;
+  height: 90px;
+  background-image: image-url("reminder-large.png");
+  margin-bottom: 10px;
+}
+
+table {
+  thead {
+    th {
+      color: @white;
+
+      a {
+        color: @white !important;
+
+        &:hover {
+          color: @gold !important;
+        }
+      }
+    }
+  }
+}
+
+.nav.nav-tabs {
+  border: 0;
+  margin: 0;
+
+  li {
+    margin-right: 8px;
+
+    a {
+      border: 1px solid @tableBorder;
+      background-color: darken(@tableBackground, 3%);
+      color: @white;
+      .opacity(80);
+      .border-top-left-radius(@borderRadiusSmall);
+      .border-top-right-radius(@borderRadiusSmall);
+
+      &:hover {
+        .opacity(100);
+        background-color: darken(@tableBackground, 3%);
+        color: @gold;
+      }
+    }
+
+    &.active {
+      a {
+        .opacity(100);
+        background-color: lighten(@tableBackground, 6%);
+        color: @gold;
+      }
+    }
+  }
+}
+
+.tab-content {
+  border: 1px solid @tableBorder;
+  background-color: darken(@wellBackground, 3%);
+}
+
+.translation_missing {
+  color: red !important;
+}
+
+.hidden {
+  display: none;
+}
+
+p.emph {
+  font-size: 110%;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.center {
+  text-align: center !important;
+}
+
+.caret-up, .caret-down {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  vertical-align: middle;
+  content: "";
+
+  position: relative;
+  top: -1px;
+  margin-left: 8px;
+}
+
+.caret-up {
+  border-bottom: 5px solid @white;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+}
+
+.caret-down {
+  border-top: 5px solid @white;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+}
+
+#card-tooltip {
+  position: absolute;
+  top: 200px;
+  left: 200px;
+  z-index: 900;
+  overflow: hidden;
+}
+
+@font-face {
+  font-family: "Dwarven Axe";
+  src: font-url("dwarvenaxe/font.eot");
+  src: font-url('dwarvenaxe/font.eot?#iefix') format('embedded-opentype'),
+       font-url('dwarvenaxe/font.woff') format('woff'),
+       font-url('dwarvenaxe/font.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "Honey Mead Bold";
+  src: font-url("honeymead_bold/font.eot");
+  src: font-url('honeymead_bold/font.eot?#iefix') format('embedded-opentype'),
+       font-url('honeymead_bold/font.woff') format('woff'),
+       font-url('honeymead_bold/font.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "Honey Mead Bold Italic";
+  src: font-url("honeymead_bold_italic/font.eot");
+  src: font-url('honeymead_bold_italic/font.eot?#iefix') format('embedded-opentype'),
+       font-url('honeymead_bold_italic/font.woff') format('woff'),
+       font-url('honeymead_bold_italic/font.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "Honey Mead";
+  src: font-url("honeymead/font.eot");
+  src: font-url('honeymead/font.eot?#iefix') format('embedded-opentype'),
+       font-url('honeymead/font.woff') format('woff'),
+       font-url('honeymead/font.ttf') format('truetype');
+}
+
+#preloader {
+  .a { font-family: "Dwarven Axe"; }
+  .b { font-family: "Honey Mead Bold"; }
+  .c { font-family: "Honey Mead Bold Italic"; }
+}
+
+.game-card {
+  display: none;
+
+  .loading {
+    position: relative;
+    z-index: 1001;
+
+    width: 125px;
+    padding: 8px 12px 8px 12px;
+    color: @textColor;
+    border: 1px solid @tableBorder;
+    text-align: center;
+    text-decoration: none;
+    font-size: 120%;
+    background-color: @tableBackgroundAccent;
+    .border-radius(@baseBorderRadius);
+    vertical-align: middle;
+
+    .indicator {
+      vertical-align: middle;
+      height: 32px;
+      width: 32px;
+      background: image-url("loading.gif") no-repeat;
+      display: inline-block;
+      margin-right: 8px;
+    }
+
+    span {
+      position: relative;
+      top: 2px;
+    }
+  }
+
+  .pending-contents {
+    display: none !important;
+  }
+
+  .contents {
+    display: none;
+    height: 100%;
+  }
+
+  &.show {
+    display: block;
+    .contents {
+      display: block;
+    }
+  }
+
+
+  .base {
+    position: relative;
+    z-index: 1001;
+  }
+
+  .icon {
+    position: relative;
+    z-index: 1000;
+    width: 261px;
+  }
+
+  .cost {
+    position: relative;
+    z-index: 1002;
+  }
+
+  .stats {
+    position: relative;
+    z-index: 1002;
+  }
+
+  .resource {
+    position: relative;
+    z-index: 1002;
+  }
+
+  .resource-cost {
+    position: relative;
+    z-index: 1002;
+  }
+
+  .name {
+    position: relative;
+    z-index: 1002;
+  }
+
+  .types {
+    position: relative;
+    z-index: 1002;
+  }
+
+  .name, .types, .desc, .flavor, .passive-rules {
+    text-align: center;
+    color: #3B2920;
+  }
+
+  .name {
+    font-family: "Dwarven Axe";
+    font-size: 150%;
+  }
+
+  .types {
+    font-family: "Dwarven Axe";
+    font-size: 125%;
+
+    .type-cat {
+      text-transform: uppercase;
+    }
+  }
+
+  .passive-rules, .desc {
+    font-size: 110%;
+  }
+
+  .desc {
+    font-family: "Honey Mead Bold";
+  }
+
+  .passive-rules, .flavor {
+    font-family: "Honey Mead Bold Italic";
+  }
+
+  .stat {
+    position: relative;
+    z-index: 1002;
+  }
+
+  .passive-rules {
+    text-align: left;
+    z-index: 1002;
+
+    ul {
+      list-style: none;
+      margin: 0;
+
+      li {
+        width: 100%;
+        margin-left: 0;
+        float: none;
+        line-height: 16px;
+      }
+    }
+
+    .astrisk {
+      position: relative;
+      top: 1px;
+      font-weight: bold;
+    }
+  }
+
+  .text {
+    position: relative;
+    z-index: 1002;
+  }
+
+  .desc {
+    text-align: left;
+    z-index: 1002;
+    line-height: 0.9;
+  }
+
+  .flavor {
+    z-index: 1002;
+    line-height: 0.9;
+    text-align: center;
+    position: absolute;
+    left: 12px;
+    top: 85px;
+  }
+}
+
+table {
+  thead {
+    th {
+      a {
+        color: @textColor;
+
+        &:hover {
+          color: darken(@textColor, 10%);
+        }
+      }
+    }
+  }
+}
+
+.gold {
+  color: @gold;
+}
+
+.rarity-0 {
+  color: @rarityCommon;
+
+  a {
+    color: @rarityCommon;
+
+    &:hover {
+      color: darken(@rarityCommon, 10%);
+    }
+  }
+}
+
+.rarity-1 {
+  color: @rarityUncommon;
+
+  a {
+    color: @rarityUncommon;
+
+    &:hover {
+      color: darken(@rarityUncommon, 10%);
+    }
+  }
+}
+
+.rarity-2 {
+  color: @rarityRare;
+
+  a {
+    color: @rarityRare;
+
+    &:hover {
+      color: darken(@rarityRare, 10%);
+    }
+  }
+}
+
+.resource-order {
+  color: @resourceOrder;
+}
+
+.resource-growth {
+  color: @resourceGrowth;
+}
+
+.resource-energy {
+  color: @resourceEnergy;
+}
+
+.resource-decay {
+  color: @resourceDecay;
+}
+
+#error-list {
+  margin-bottom: 24px;
+  display: none;
+}
+
+.well-trimmed {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#social-buttons {
+  .set:first-child {
+    margin-bottom: 13px;
+  }
+
+  .set {
+    text-align: center;
+  }
+
+  a {
+    text-decoration: none !important;
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+  }
+}
+
+p.last {
+  margin-bottom: 0;
+}
+
+.select-xlarge {
+  width: 270px;
+  height: 125px !important;
+}
+
+.navbar-inner {
+  .border-radius(0);
+}
+
+.navbar .container {
+  #grid > .core > .span(@gridColumns);
+
+  a:focus {
+    outline: none;
+  }
+}
+
+html, body {
+  height: 100%;
+}
+
+.input-full {
+  width: 96%;
+}
+
+.wrapper .navbar .navbar-inner .container .brand {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 28px;
+  padding-right: 8px;
+}
+
+.wrapper {
+  margin-bottom: -40px;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+}
+
+.well {
+//  border: 1px solid @borderColor;
+//  background: @darkBg;
+//  .border-radius(2px);
+//  #gradient > .vertical(@darkBg, lighten(@darkBg, 1%));
+}
+
+.table-bordered {
+  th, td {
+    border-left: 1px solid @black;
+
+    &:first-child {
+      border-left: 1px solid @tableBorder;
+    }
+  }
+
+  td {
+    border-top: 1px solid @black;
+  }
+
+  th {
+    border-bottom: 1px solid @tableBorder;
+  }
+
+  tr:first-child {
+    td {
+      border-top: 0;
+    }
+  }
+}
+
+#datanav {
+  .navbar-inner {
+    border: 1px solid @borderColor;
+    .border-radius(2px);
+    background: @wellBackground;
+    #gradient > .vertical(@wellBackground, darken(@wellBackground, 1%));
+    padding-left: 0px;
+    padding-right: 0px;
+    min-height: inherit;
+
+    a.dropdown-toggle {
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+
+    .resources {
+      position: relative;
+      top: -1px;
+      margin-right: 2px;
+    }
+  }
+}
+
+
+.push {
+  height: 60px;
+}
+
+footer {
+  height: 40px;
+  margin-bottom: 4px;
+
+  p, a, span {
+    line-height: 36px;
+    vertical-align: bottom;
+  }
+
+  p, ul {
+    margin-bottom: 0;
+  }
+}
+
+footer li {
+  float: left;
+  margin-left: 14px;
+}
+
+// Opera
+body:before {
+  content:"";
+  height:100%;
+  float:left;
+  width:0;
+  margin-top:-32767px;
+}

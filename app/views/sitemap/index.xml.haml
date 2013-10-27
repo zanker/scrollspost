@@ -1,0 +1,21 @@
+:plain
+  <?xml version="1.0" encoding="UTF-8"?>
+%urlset{:xmlns => "http://www.sitemaps.org/schemas/sitemap/0.9"}
+  = url(faq_index_url, 0.5, nil, :daily)
+  = url(news_index_url, 0.7, Time.utc(Post.last_post), :daily)
+
+  = url(patches_url, 0.8, nil, :weekly)
+  - GameVersion.where(:log.exists => true).ignore(:log).each do |version|
+    = url(patches_show_url(:version => version.version.parameterize), 0.8, version.created_at, :weekly)
+
+  - Post.only(:updated_at, :slug).each do |post|
+    = url(news_show_url(post.slug), 0.9, post.updated_at, :weekly)
+
+  = url(cards_index_url, 1.0, Rails.cache.read("card-cache"), :hourly)
+
+  = url(pricing_url, 1.0, Rails.cache.read("price-d1-cache"), :always)
+  - PricingController::STAT_PERIOD.each do |type, period|
+    = url(pricing_index_search_url(:period => type), 0.9, Rails.cache.read("price-#{period}-cache"), :always)
+
+  - Card.only(:card_id, :name, :updated_at).each do |card|
+    = url(url_for(:controller => :cards, :action => :show, :card_id => card.card_id, :name => card.name.parameterize, :only_path => false), 1.0, card.updated_at, :hourly)

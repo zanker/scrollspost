@@ -1,0 +1,109 @@
+@import "bootstrap/variables.less";
+@import "bootstrap/mixins.less";
+
+#search {
+  .well {
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    .span12 {
+      margin: 0;
+      width: 100%;
+      margin-top: 12px;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    form {
+      margin-bottom: 0;
+    }
+  }
+
+  #resources, #rarities {
+    .btn {
+      .buttonBackground(lighten(@tableBackground, 10%), darken(@tableBackgroundAccent, 5%));
+
+      &.active {
+        background-color: darken(@tableBackground, 15%) e("\9");
+        .gradientBar(darken(@tableBackground, 5%), darken(@tableBackground, 8%), @white, 0 1px 1px rgba(255,255,255,0));
+      }
+    }
+  }
+
+  #resources, #rarities, #rules, #categories, #last, #version, #type {
+    display: inline-block;
+    width: 225px;
+    margin: 0;
+  }
+
+  #rarities, #rules, #categories, #last, #version, #type {
+    font-size: 110%;
+
+    &.btn-group > .btn + .btn {
+      margin-left: -5px;
+    }
+
+    &.dropdown {
+      .dropdown-toggle {
+        color: @gold;
+        text-decoration: none !important;
+
+        span > span {
+          color: @textColor;
+        }
+
+        &:hover {
+          color: lighten(@gold, 15%);
+
+          span > span {
+            color: @white;
+          }
+        }
+      }
+    }
+  }
+
+  #rarities {
+    .btn {
+      padding: 8px 10px 8px 10px;
+    }
+  }
+
+  .btn {
+    outline: 0;
+  }
+
+  #cost, #hp, #cd, #atk, #rating {
+    display: inline-block;
+    width: 225px;
+    margin-top: 6px;
+
+    label {
+      display: inline-block;
+      font-size: 110%;
+      margin: 0 6px 0 0;
+      vertical-align: middle;
+      color: @gold;
+
+      &.div {
+        font-size: 140%;
+        margin: 0 6px 0 6px;
+        color: @white;
+      }
+    }
+
+    input[type='text'] {
+      width: 15px;
+      margin: 0;
+      padding: 0 6px 0 6px;
+      text-align: center;
+      color: @black;
+    }
+  }
+
+  input[type='submit'] {
+    float: right;
+  }
+}

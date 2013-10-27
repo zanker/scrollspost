@@ -1,0 +1,55 @@
+en:
+  usercp:
+    cards:
+      index:
+        store_management: Store Management
+        no_account_found_1: We couldn't find any Scrolls accounts associated with this one.
+        no_account_found_2: You will need to install the {ScrollsPost in-game mod} for your cards to be automatically synced.
+        no_cards_found_1: No cards were found synced to your account yet.
+        no_cards_found_2: Are you sure you installed the {in-game mod}? If you did and you still don't see cards, {contact us} and will help you out.
+        name: Name
+        rarity: Rarity
+        resource: Cost
+        quantity: Quantity
+        in_deck: In Deck
+        to_buy: To Buy
+        to_sell: To Sell
+        no_cards_found: No Cards Found
+        gold_per: "gold/per"
+        auto_price: Auto Price
+        auto_quantity: Auto Quantity
+        quick_toggle: Quick Toggles
+        update: Update
+        last: "Last:"
+        price_using: "Automatically price using"
+        of_price_data: of price data, and add
+        to_the_price: to the price
+        updating: Updating...
+        list_buy: "Buy:"
+        ignore: Don't change
+        three_of: Up to 3 of everything
+        two_of: Up to 2 of everything
+        three_of_have: Up to 3 of everything I own
+        two_of_have: Up to 2 of everything I own
+        three_of_deck: Up to 3 of everything in a deck
+        two_of_deck: Up to 2 of everything in a deck
+        one_of_missing: Up to 1 of everything I don't have
+        two_of_missing: Up to 2 of everything I don't have
+        three_of_missing: Up to 3 of everything I don't have
+        list_sell: "Sell:"
+        three_keep: Keep 3 of everything
+        two_keep: Keep 2 of everything
+        one_keep: Keep 1 of everything
+        every_non_deck: Everything not in a deck
+        automatically: Automatically
+        zero_out: Zero out
+        saving_changes: Saving Changes...
+        sync_failed: Sync Failed
+        unable_to_save_1: We were unable to save your changes due to an error. Will try again in a second.
+        unable_to_save_2: If you continue to have issues, please {contact us} and will help you out.
+        tradable: Tradable
+        not_public: Your store is currently private, only you can see it. If you want to allow anyone to view it {go to your settings} and enable "Public".
+        na: "N/A"
+
+
+

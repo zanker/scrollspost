@@ -1,0 +1,158 @@
+@import "bootstrap/variables.less";
+@import "bootstrap/mixins.less";
+
+#usercp_cards_index {
+  #sync-failed {
+    display: none;
+  }
+
+  #saving {
+    position: relative;
+    top: -4px;
+    display: none;
+
+    span {
+      margin-left: 6px;
+      position: relative;
+      top: 2px;
+    }
+  }
+
+  input[type='text'], .input-append > span {
+    padding: 1px 4px 1px 4px;
+    background-color: darken(@inputBackground, 3%);
+    color: @black;
+  }
+
+  input[type='text'], .input-append {
+    margin: 0;
+  }
+
+  #quick-menu {
+    margin-bottom: 20px;
+
+    .tab-content {
+      background-color: @tableBackground;
+      padding: 9px;
+    }
+
+    #period, #buy-quantity, #sell-quantity {
+      .dropdown-toggle {
+        span {
+          color: @gold;
+
+          span {
+            color: @white;
+          }
+        }
+      }
+    }
+
+    #tab-auto-price {
+      label, #period, #percent {
+        display: inline-block;
+        margin-right: 8px;
+        vertical-align: middle;
+        margin-bottom: 0;
+      }
+
+      input[type='text'] {
+        vertical-align: middle;
+        width: 35px;
+      }
+    }
+
+    #tab-auto-quantity {
+      #sell-quantity, #buy-quantity, label {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 2px 20px 0;
+      }
+
+      label {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  table {
+    td {
+      vertical-align: middle;
+    }
+
+    tr.missing {
+      .opacity(85);
+
+      td {
+        background-color: darken(@errorBackground, 12%);
+      }
+
+      &:hover {
+        td {
+          background-color: darken(@errorBackground, 14%);
+        }
+      }
+    }
+
+    .icon {
+      width: 40px;
+    }
+
+    .name {
+      width: 22%;
+      cursor: pointer;
+    }
+
+    .rarity {
+      width: 10%;
+    }
+
+    .resource {
+      width: 12%;
+
+      div {
+        margin-right: 8px;
+      }
+
+      span {
+        font-size: 150%;
+        color: @gold;
+        vertical-align: middle;
+      }
+    }
+
+    .quantity, .resource, .buy, .sell {
+      width: 9%;
+      text-align: center;
+    }
+
+    td.quantity {
+      font-size: 150%;
+      color: @gold;
+    }
+
+    .buy, .sell {
+      width: 18%;
+
+      .to-buy, .to-sell {
+        width: 20px;
+      }
+
+      .sell-price, .buy-price {
+        width: 35px;
+      }
+
+      .input-append {
+        span {
+          font-size: @fontSizeSmall;
+        }
+      }
+
+      label {
+        font-size: 130%;
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+en:
+  cards:
+    show_store:
+      last_buys: "Last %{count} WTB (Store)"
+      last_sells: "Last %{count} WTS (Store)"
+      none_found: No offers found
+      name: Name
+      quantity: Quantity
+      price: Price
+      view_store: View Store

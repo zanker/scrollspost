@@ -1,0 +1,337 @@
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+html.noselect {
+  .user-select(none);
+
+  * {
+    .user-select(none);
+  }
+}
+
+#deckbuilders_index {
+  width: 80%;
+  min-width: @gridRowWidth;
+
+  #resources {
+    .btn {
+      padding-left: 6px;
+      padding-right: 6px;
+    }
+  }
+
+  #manage {
+    .well {
+      padding: 4px 6px 4px 6px;
+    }
+
+    .usage {
+      display: inline-block;
+      margin-left: 24px;
+      color: @gold;
+    }
+
+    .usage, .option {
+      position: relative;
+      top: 2px;
+    }
+
+    .option {
+      display: inline-block;
+      margin-right: 8px;
+
+      span {
+        vertical-align: middle;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  #deck #deck-empty {
+    width: 100%;
+    font-size: 160%;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  #manage, #preview-search {
+    width: @gridRowWidth;
+    .container-fixed();
+
+    .span12, .span3 {
+      margin-left: 0;
+    }
+  }
+
+  #expanded {
+    #deck {
+      width: 80%;
+      min-width: 970px;
+    }
+  }
+
+  #summary {
+    position: relative;
+    z-index: 1;
+
+    dl {
+      margin: 0;
+
+      dt, dd {
+        padding: 2px 0 2px 0;
+        font-size: 95%;
+      }
+
+      .pad {
+        height: 5px;
+      }
+
+      dt {
+        width: 95px;
+        font-weight: normal;
+        color: @gold;
+      }
+
+      dd {
+        margin-left: 105px;
+      }
+    }
+  }
+
+  .game-card {
+    z-index: -1;
+  }
+
+  .deck-card {
+    position: absolute;
+    z-index: 1000;
+    border: 1px solid @borderColor;
+    width: 200px;
+    height: 150px;
+    .border-radius(4px);
+    .scale(0.85);
+    .box-shadow(1px 3px 6px 3px rgba(0, 0, 0, 0.3));
+    cursor: pointer !important;
+
+    .name, .data {
+      background-color: rgba(0, 0, 0, 0.85);
+    }
+
+    .name {
+      width: 100%;
+      padding: 2px 0 2px 0;
+      text-align: center;
+      position: relative;
+      top: -1px;
+      .border-top-left-radius(3px);
+      .border-top-right-radius(3px);
+    }
+
+    .data {
+      position: relative;
+      top: 101px;
+      height: 26px;
+      .border-bottom-left-radius(3px);
+      .border-bottom-right-radius(3px);
+
+      .cost {
+        margin-left: 4px;
+      }
+
+      .stats {
+        width: 158px;
+        margin-right: 0;
+      }
+    }
+  }
+
+  #cards ul li, .deck-card {
+    .name, .cost, .atk, .cd, .hp, .stats, .imgflow, .primary, .quantity {
+      display: inline-block;
+    }
+
+    .quantity {
+      span:first-child {
+        color: @gold;
+        font-weight: bold;
+      }
+
+      span:last-child {
+        margin-right: 6px;
+        margin-left: 6px;
+        position: relative;
+        top: -1px;
+      }
+    }
+
+    .cost {
+      .imgflow {
+        height: 28px;
+        width: 28px;
+      }
+
+      img {
+        .scale(0.70);
+        height: inherit;
+        position: relative;
+        left: -4px;
+      }
+
+      span {
+        font-size: 120%;
+        color: @gold;
+        position: relative;
+        left: -5px;
+        top: 1px
+      }
+    }
+
+    .stats {
+      text-align: right;
+      margin-right: 4px;
+      width: 145px;
+
+      .atk, .cd, .hp {
+        width: 45px;
+      }
+
+      .atk {
+        color: lighten(@red, 16%);
+      }
+
+      .hp {
+        color: @green;
+      }
+
+      .cd {
+        color: @gold;
+      }
+    }
+  }
+
+  #search-container {
+    width: 910px;
+  }
+
+  #preview {
+    width: 230px;
+  }
+
+  #deck {
+    .well {
+      min-height: 800px;
+    }
+  }
+
+  #search {
+    #resources, #rarities, #categories, #rules {
+      width: 180px;
+    }
+
+    #rarities {
+      margin-right: 10px;
+    }
+
+    #name {
+      display: inline-block;
+      vertical-align: middle;
+      input[type='text'] {
+        width: 120px;
+        margin: 0;
+      }
+
+      form {
+        margin: 0;
+      }
+    }
+  }
+
+  #cards {
+    .well {
+      height: 300px;
+      padding: 4px 4px 4px 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0 0 60px 6px;
+
+      li {
+        display: inline-block;
+        margin: 0px 16px 12px 6px;
+        border: 1px solid @borderColor;
+        .border-radius(4px);
+        width: 270px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: darken(@wellBackground, 5%);
+        }
+
+        .img {
+          border-right: 1px solid @borderColor;
+
+          img {
+            height: 55px;
+            width: 73px;
+            .border-top-left-radius(2px);
+            .border-bottom-left-radius(2px);
+          }
+        }
+
+        .img, .info {
+          display: inline-block;
+        }
+
+        .img {
+          vertical-align: top;
+          margin-right: 8px;
+        }
+
+        .data {
+          margin-top: 6px;
+        }
+
+        &.limit-hit {
+          filter: gray;
+          -webkit-filter: grayscale(100%);
+          border: 1px solid lighten(@borderColor, 14%);
+          cursor: default;
+
+          &:hover {
+            background-color: transparent;
+          }
+        }
+      }
+    }
+  }
+
+  #no-cards {
+    font-size: 140%;
+    text-align: center;
+    padding: 20px 0 20px 0;
+    display: none;
+  }
+
+  #loading {
+    font-size: 140%;
+    text-align: center;
+    padding: 20px 0 20px 0;
+  }
+
+  #preview {
+    height: 400px;
+
+    .game-card {
+      position: relative;
+      top: -38px !important;
+      left: -22px !important;
+      .scale(0.85);
+    }
+  }
+}

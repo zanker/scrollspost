@@ -1,0 +1,298 @@
+@import "bootstrap/variables";
+
+#replays_show {
+  #damage-chart {
+    .graph {
+      height: 350px;
+      width: 100%;
+    }
+
+    .well {
+      padding: 2px;
+      width: 98%;
+      margin: auto;
+    }
+
+    .span12 {
+      margin: 20px 0 20px 0;
+
+      h4 {
+        margin: auto;
+        margin-bottom: 8px;
+        width: 98%;
+      }
+
+      &:first-child {
+        margin-top: 12px;
+      }
+    }
+
+    .cards-played {
+      margin: 12px 0 18px 12px;
+      height: 30px;
+
+      span {
+        font-size: 120%;
+        margin-right: 12px;
+      }
+
+      ul {
+        margin: 0;
+        list-style: none;
+        display: inline-block;
+
+        li {
+          display: inline-block;
+          margin-right: 14px;
+          line-height: 30px;
+
+          img {
+            margin-right: 8px;
+          }
+
+          .name {
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
+
+  #info {
+    width: 285px;
+
+    .well {
+      padding: 0;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+
+      li {
+        margin: 4px 0 4px 0;
+        padding: 4px 0 4px 0;
+        border-top: 1px solid @black;
+
+        &:first-child {
+          border-top: 0;
+        }
+
+        .label, .text {
+          display: inline-block;
+        }
+
+        .label {
+          width: 95px;
+          text-align: right;
+          color: @gold;
+          margin-right: 8px;
+        }
+
+        .text {
+          width: 175px;
+        }
+      }
+    }
+  }
+
+  #summary {
+    width: 500px;
+
+    ul {
+      .deck-type {
+        padding: 10px 0 10px 0 !important;
+      }
+
+      .final-resources, .deck-resources {
+        .text > div {
+          display: inline-block;
+          width: 28px;
+          margin: 0 4px 0 4px;
+          text-align: center;
+          font-size: 120%;
+        }
+      }
+    }
+  }
+
+  #stats-summary {
+    width: 325px;
+
+    .span2 {
+      width: 75px;
+    }
+
+    .span2 {
+      li {
+        a {
+          position: relative;
+          top: -1px;
+        }
+      }
+    }
+  }
+
+  #summary, #stats-summary {
+    .well {
+      padding: 0;
+    }
+
+    .spoiler {
+      display: none;
+    }
+
+    .side-info, .side-list {
+      display: inline-block;
+      float: none;
+      vertical-align: top;
+
+      ul {
+        list-style: none;
+        margin: 0;
+
+        li {
+          padding: 6px 0 6px 0;
+          border-top: 1px solid @black;
+
+          &:first-child {
+            border-top: 0;
+          }
+        }
+      }
+    }
+
+    .side-list {
+      margin-left: -5px;
+      width: 160px;
+
+      ul {
+        li {
+          border-left: 1px solid @black;
+          border-right: 1px solid @black;
+          text-align: center;
+          color: @gold;
+        }
+      }
+    }
+
+    .side-info {
+      margin-left: 0;
+
+      &.side-white {
+        li {
+          .text {
+            text-align: right;
+            float: right;
+            margin-right: 12px;
+
+            .number {
+              float: right;
+              margin-left: 8px;
+            }
+          }
+        }
+      }
+
+      &.side-black {
+        margin-left: -5px;
+
+        li {
+          .text {
+            float: left;
+            text-align: left;
+            margin-left: 12px;
+
+            .number {
+              float: left;
+              margin-right: 8px;
+            }
+          }
+        }
+      }
+
+      ul {
+        li {
+          .text {
+            display: inline-block;
+            vertical-align: top;
+          }
+        }
+      }
+    }
+  }
+
+  #card-summary {
+    .span6 {
+      width: 500px;
+
+      .well {
+        padding: 0;
+      }
+
+      table {
+        margin-bottom: 0;
+        border: 0;
+
+        th:first-child, td:first-child {
+          border-left: 0;
+        }
+
+        .icon {
+          width: 40px;
+          min-width: 40px;
+        }
+
+        .name {
+          width: 50%;
+        }
+
+        .played, .resource {
+          text-align: center;
+        }
+
+        .played {
+          width: 25%;
+        }
+
+        .resource {
+          width: 25%;
+
+          div {
+            margin-right: 8px;
+          }
+
+          span {
+            font-size: 150%;
+            color: @gold;
+            vertical-align: middle;
+            position: relative;
+            top: -1px;
+          }
+        }
+
+        .name, .resource, .played {
+          vertical-align: middle;
+        }
+
+        td.played {
+          font-size: 140%;
+        }
+      }
+
+      &.side-white {
+        float: left;
+        margin-left: 20px;
+      }
+
+      &.side-black {
+        float: right;
+        margin-right: 20px;
+
+        h4 {
+          text-align: right;
+        }
+      }
+    }
+  }
+}

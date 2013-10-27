@@ -1,0 +1,26 @@
+= render_block("show_base") do
+  - [[:buy, @last_buys], [:sell, @last_sells]].each do |key, list|
+    .span4
+      %h4.gold= t(".last_#{key}s", :count => CONFIG[:limits][:last_history])
+      .well.well-small.well-trimmed
+        %table.table.table-bordered.table-hover.table-striped
+          %thead
+            %tr
+              %th.name= t(".name")
+              %th.quantity= t(".quantity")
+              %th.price= t(".price")
+              %th.view= t(".view_store")
+          %tbody
+            - if list.empty?
+              %tr
+                %td{:colspan => 4}= t(".none_found")
+
+            - else
+              - list.each do |log|
+                %tr
+                  %td.name= @accounts[log.scroll_account_id]
+                  %td.quantity= number_with_delimiter(log["#{key}_quant"])
+                  %td.price.gold= number_with_delimiter(log["#{key}_price"])
+                  %td.view= link_to(t(".view_store"), store_path(log.scroll_account_id.base36_encode, @accounts[log.scroll_account_id].parameterize))
+
+  .clearfix

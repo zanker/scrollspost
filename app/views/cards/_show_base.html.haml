@@ -1,0 +1,21 @@
+.row
+  .span9
+    %ul.nav.nav-tabs
+      %li{:class => params[:action] == "show" ? :active : nil}= link_to(t(".card_info"), cards_path)
+      %li{:class => params[:action] == "show_market" ? :active : nil}= link_to(t(".price_stats"), cards_market_path)
+      %li{:class => params[:action] == "show_chat" ? :active : nil}= link_to(t(".trade_chat"), cards_chat_path)
+      %li{:class => params[:action] == "show_store" ? :active : nil}= link_to(t(".user_stores"), cards_store_path)
+
+    .tab-content
+      .tab-pane.active
+        = body
+
+  .span3
+    .game-card.show
+      .contents
+      .pending-contents
+
+:javascript
+  var card_id = #{@card.card_id};
+  var card_data = #{card_tooltip_data(@card).to_json};
+  ScrollsPost.Helpers.render_tooltip($("##{params[:controller]}_#{params[:action]}").find(".game-card"), card_data);

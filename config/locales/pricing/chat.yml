@@ -1,0 +1,15 @@
+en:
+  pricing:
+    chat:
+      name: Name
+      cost: Cost
+      rarity: Rarity
+      channel: Channel
+      user: User
+      price: Price
+      age: Age
+      none_found: No logs found
+      live_chat: The below are the last 100 trade chat logs from our bot of people selling items. Basic deduping is done, but besides that it's straight from chat.
+      wts: WTS
+      wtb: WTB
+      type: Type

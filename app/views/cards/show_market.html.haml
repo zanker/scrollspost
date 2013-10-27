@@ -1,0 +1,16 @@
+
+= render_block("show_base") do
+  %h4.gold= t(".buy_stats", :days => 7)
+  #buy-graph
+
+  %h4.gold= t(".sell_stats", :days => 7)
+  #sell-graph
+
+  %h4.gold= t(".unit_stats", :days => 7)
+  #unit-graph
+
+:javascript
+  var buy_stats = #{@buy_stats};
+  var sell_stats = #{@sell_stats};
+  var unit_stats = #{@unit_stats};
+  var plot_bands = #{@plot_bands};

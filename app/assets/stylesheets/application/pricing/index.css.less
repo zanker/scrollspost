@@ -1,0 +1,96 @@
+@import "bootstrap/variables.less";
+@import "bootstrap/mixins.less";
+
+#pricing_index {
+  #search {
+    .span9 {
+      width: 955px;
+
+      input[type='submit'] {
+        position: relative;
+        top: 4px;
+      }
+
+      #last, #version {
+        width: 180px;
+      }
+
+      #version {
+        display: inline-block;
+      }
+    }
+  }
+
+  #live-search {
+    width: 185px;
+
+    form {
+      vertical-align: middle;
+      margin-top: 0;
+      padding: 6px 0 6px 0;
+
+      input {
+        margin-bottom: 0;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        color: @black;
+      }
+    }
+  }
+
+  table {
+    .icon {
+      width: 40px;
+    }
+
+    .resources {
+      margin-right: 6px;
+    }
+
+    .name {
+      width: 20%;
+      cursor: pointer;
+    }
+
+    .resource {
+      width: 8%;
+
+      div {
+        margin-right: 8px;
+      }
+
+      span {
+        font-size: 150%;
+        color: @gold;
+        vertical-align: middle;
+        position: relative;
+        top: -1px;
+      }
+    }
+
+    .rarity {
+      width: 10%;
+    }
+
+    .price {
+      width: 9%;
+    }
+
+    .units {
+      width: 11%;
+    }
+
+    .seen {
+      width: 10%;
+    }
+
+    td.resource, td.name, td.rarity, td.price, td.units, td.seen {
+      vertical-align: middle;
+    }
+
+    .icon, .resource, .price, .units, .rarity, .seen {
+      vertical-align: middle;
+      text-align: center;
+    }
+  }
+}

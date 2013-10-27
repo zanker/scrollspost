@@ -1,0 +1,40 @@
+@import "bootstrap/variables.less";
+@import "bootstrap/mixins.less";
+
+#cards_show_store {
+  .well {
+    padding: 0;
+
+    table {
+      margin-bottom: 0;
+      border: 0;
+
+      th:first-child, td:first-child {
+        border-left: 0;
+      }
+
+      .name {
+        width: 35%;
+      }
+
+      .price, .quantity {
+        width: 20%;
+        text-align: center;
+      }
+
+      .view {
+        width: 30%;
+        text-align: center;
+      }
+    }
+  }
+
+  .span4 {
+    width: 415px;
+    margin-left: 18px;
+
+    &:first-child {
+      margin-left: 10px;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+en:
+  pricing:
+    store:
+      name: Name
+      sell_price: Sell Price
+      buy_price: Buy Price
+      sell_total: For Sale
+      buy_total: For Purchase
+      resource: Resource
+      rarity: Rarity
+      cost: Cost
+      search: Search
+      category_prefix: "Category:"
+      categories_prefix: "Categories:"
+      searching: Searching..

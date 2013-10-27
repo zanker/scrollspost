@@ -1,0 +1,22 @@
+en:
+  store:
+    show:
+      want_to_sell: Want to Sell
+      want_to_buy: Want to Buy
+      quantity: Quantity
+      price: Price
+      no_sell_found: Don't have anything for sale right now.
+      no_buy_found: Don't need any cards right now.
+      name: Name
+      cost: Cost
+      search: Search
+      categories_prefix: "Categories:"
+      category_prefix: "Category:"
+      store: "%{name}'s Store"
+      searching: Searching...
+      in_game_name: "In-Game Name:"
+      in_game_channel: "In-Game Channel:"
+      haggle: "Will Haggle?"
+      steam_name: "Steam Name:"
+      not_public: Your store is currently private, only you can see it. If you want to allow anyone to view it {go to your settings} and enable "Public".
+      note: "Note:"

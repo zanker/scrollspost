@@ -1,0 +1,52 @@
+@import "compass/utilities/sprites/base"
+
+// Global size list
+$sizes: 16 28 32 56 64
+@each $size in $sizes
+  .size-#{$size}
+    height: #{$size}px
+    width: #{$size}px
+
+// Resources
+$resource_icons: sprite-map("resources/*.png")
+
+$resources: energy growth order decay
+$resource_sizes: 16 28 32 64
+
+.resources
+  display: inline-block
+  vertical-align: middle
+
+  @each $resource in $resources
+    @each $size in $resource_sizes
+      &.resource-#{$resource}.size-#{$size}
+        background: sprite($resource_icons, "#{$resource}-#{$size}") no-repeat
+
+.resource-decay
+  &.size-16
+    width: 19px
+  &.size-28
+    width: 33px
+  &.size-32
+    width: 38px
+  &.size-64
+    width: 59px
+
+// Cards
+.cards
+  display: inline-block
+  vertical-align: middle
+  max-width: none
+
+  &.size-tiny
+    width: 40px
+    height: 30px
+  &.size-small
+    width: 73px
+    height: 55px
+  &.size-medium
+    width: 153px
+    height: 115px
+  &.size-large
+    height: 225px
+    width: 300px

@@ -1,0 +1,47 @@
+en:
+  cards:
+    show:
+      name: Name
+      cost: Cost
+      type: Type
+      attack: Attack
+      cooldown: Cooldown
+      health: Health
+      rules: Rules
+      desc: Description
+      flavor: Flavor
+      card_live: Card (Live)
+      card_old: Card (Version %{version})
+      none: None
+      rarity: Rarity
+      history: History
+      version: Version
+      changes: Changes
+      age: Age
+      view: View
+      no_changes: Mojang hasn't made a change yet to %{name}.
+      viewing_old: The below is %{name} in %{version} of Scrolls with the differences against the live version.
+      live: Live
+      card_image: Card Image
+      no_change: No Change
+      changed: Changed
+      resource: Resource
+      animation: Animation
+      target_type: Target Type
+      sub_type: Sub-Type
+      target_unknown: We don't have a description on this target right now.
+      targets_desc:
+        FORWARD: Hits units in a line from where the card is summoned.
+        UNDEFINED: What this card can target can vary, check the card description for info.
+        RADIUS_4: Hits units in a 4 tile radius.
+        TILE: Hits a single tile.
+        ROW_FULL_IDOLS: Hits the entire row (enemy + friendly) as well as the enemy idols.
+        SEQUENTIAL: Special targeting rules apply, check the card description for info.
+        ROW_SIDE: Targets one entire friendly row.
+      targets:
+        FORWARD: Forward
+        UNDEFINED: Not Set
+        RADIUS_4: Radius 4
+        ROW_FULL_IDOLS: Entire Row + Idols
+        SEQUENTIAL: Sequential
+        ROW_SIDE: Friendly Row

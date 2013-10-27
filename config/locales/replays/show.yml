@@ -1,0 +1,64 @@
+en:
+  replays:
+    show:
+      name: Name
+      result: Result
+      winner: Won
+      loser: Lost
+      show_spoiler: "[Show Spoilers]"
+      time_taken: Time Taken
+      spoiler: "[Spoiler]"
+      unknown: Unknown
+      cards_sac_draw: Card -> 2 Cards
+      cards_sac_resources: Card -> Resources
+      cards_drawn: Cards Drawn
+      unit_dmg: Unit Dmg
+      idol_dmg: Idol Dmg
+      units_played: Units Played
+      spells_played: Spells Played
+      enchant_played: Enchantments Played
+      idols_killed: Idols Destroyed
+      most_dmg_unit: Most Dmg
+      vs: Vs
+      view_unit: "[Unit]"
+      na: N/A
+      rating: Rating
+      type: "Type:"
+      length: "Length:"
+      deck_type: Deck Type
+      download: Download
+      format_sp: ScrollsPost Format
+      round_timer: Round Timer
+      format_sg: GameReplay
+      length: "Length:"
+      recommended: "[Recommended]"
+      format_sp_desc: Downloads a replay format that can be played within the ScrollsPost mod.
+      format_sg_desc: Downloads a replay format that can be played within the GameReplay mod.
+      version: "Version:"
+      downloads: "Downloads:"
+      perspective: "Viewpoint %{help}:"
+      perspective_desc: "The person who recorded the match, letting you see their entire hand while they play when watching in-game."
+      surrendered: Surrendered
+      player_card_summary: "%{name}'s Summary"
+      card_summary: Card Summary
+      played: Used
+      cost: Cost
+      damage_graph: Game Graphs
+      player_damage: "%{name}'s Game Graph"
+      cards_played_turn: "Round {number} Played:"
+      no_cards_played: No Cards Played
+      rounds: Rounds
+      infinite: Infinite
+      replay_downloading: Replay Downloading
+      your_download_start: Your downloading should be starting in a second. You will need the ScrollsPost mod to watch this replay, {click here} for details on getting the mod.
+      download_mod: If you already have the mod, just type /scrollspost and go to Replay List, then "Play File" and select the downloaded replay and you're good to go!
+      issues_contact: Feel free to {contact us} if you run into any issues.
+      replay_url_info: You will need the ScrollsPost mod to watch this replay, {click here} for details on getting the mod.
+      url_mod: If you already have the mod, just type /scrollspost and go to Replay List, then "Play URL" enter the below URL and you're good to go!
+      resources: Final Resources
+      view: View
+      in_game_url: In-Game URL
+      replay_url: Replay URL
+      deck_links: Decks
+      view_deck: View Deck
+      deck_reconstruct: The deck shown is a reconstruction based on the cards seen throughout the match by both sides.

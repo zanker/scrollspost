@@ -1,0 +1,20 @@
+en:
+  cards:
+    search:
+      cost: cost
+      rules: Rules
+      rules_prefix: "Rules:"
+      rule_prefix: "Rule:"
+      rule: "Rule: %{name}"
+      search: Search
+      categories_prefix: "Categories:"
+      category_prefix: "Category:"
+      category: "Type: %{name}"
+      atk_full: Attack
+      cd_full: Cooldown
+      searching: Searching...
+      hp: HP
+      cost: Cost
+      reset: Reset
+      filter: Filter
+      filtering: Filtering...

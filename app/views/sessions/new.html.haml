@@ -1,0 +1,28 @@
+.row
+  .span12
+    %h3.header= t(".login")
+
+.row
+  .span12
+    .well.well-small.well-trimmed
+      %p.emph= linkify_text(t(".login_info_1"), root_path, faq_index_path(:anchor => "1"))
+      %p.emph= linkify_text(t(".login_info_2"), new_user_path)
+
+  .span12
+    .well.well-small
+      #error-list
+      = form_for @user, :url => {:controller => :sessions, :action => :create}, :html => {:class => "form-horizontal"} do |f|
+        .control-group
+          = f.label(:email, :class => "control-label")
+          .controls
+            = f.email_field(:email, :class => "input-large")
+            %span.help-inline
+
+        .control-group
+          = f.label(:password, :class => "control-label")
+          .controls
+            = f.password_field(:password, :class => "input-medium")
+            %span.help-inline
+
+        %input.btn.btn-success{:type => :submit, :value => t(".login"), "data-loading-text" => t(".logging_in")}
+

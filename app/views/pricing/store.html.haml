@@ -1,0 +1,88 @@
+- cache("#{request.path}/#{Rails.cache.read("store-cache")}/#{DEPLOY_ID}", :expires_in => 30.minutes) do
+  .row#search
+    .span12
+      .well.well-small.well-trimmed
+        %form{:action => pricing_store_path}
+          #resources.btn-group
+            - Card::RESOURCE_MAP.each_key do |resource|
+              %button.btn.btn-inverse{:class => @filters[:resources][resource] ? :active : nil, "data-key" => resource}
+                .resources.size-28{:class => "resource-#{resource}"}
+
+          #rarities.btn-group
+            - Card::RARITY_MAP.each do |id, rarity|
+              %button.btn.btn-inverse{:class => @filters[:rarities][id] ? :active : nil, "data-key" => rarity}
+                %span{:class => "rarity-#{id}"}
+                  = t("short_rarities.#{rarity}")
+
+          #categories.dropdown
+            %a.dropdown-toggle{"data-toggle" => :dropdown, :href => "#"}
+              %span
+                #{t(".categories_prefix")}
+                %span #{t("all")}
+              %strong.caret
+            %ul.dropdown-menu
+              %li{:class => !@filters[:category_id] ? :active : nil}
+                %a{:href => "#", "data-key" => "all", "data-prefix" => t(".categories_prefix")}= t("all")
+
+              - @categories.each do |category_id, category|
+                %li{:class => @filters[:category_id] == category_id ? :active : nil}
+                  %a{:href => "#", "data-key" => category[:slug], "data-prefix" => t(".category_prefix")}= category[:name].titleize
+
+          %input.btn.btn-success{:type => :submit, :value => t(".search"), "data-loading-text" => t(".searching")}
+
+      .clearfix
+  :javascript
+    $("#pricing_store").find(".dropdown").each(function(){ var active = $(this).find("ul.dropdown-menu li.active a"); $(this).find("a.dropdown-toggle span").html(active.data("prefix") + " <span>" + active.text() + "</span>"); });
+
+  .row
+    .span12
+      %table.table.table-bordered.table-hover.table-striped
+        %thead
+          %tr
+            %th.icon
+            %th.name!= sort_header(t(".name"), "name")
+            %th.resource!= sort_header(t(".cost"), "resource")
+            %th.rarity!= sort_header(t(".rarity"), "rarity")
+            %th.price!= sort_header(t(".buy_price"), "buy-price")
+            %th.quantity!= sort_header(t(".buy_total"), "buy-quantity")
+            %th.price!= sort_header(t(".sell_price"), "sell-price")
+            %th.quantity!= sort_header(t(".sell_total"), "sell-quantity")
+
+        %tbody
+          - @cards.each do |card|
+            %tr
+              %td.icon
+                = image_tag("cards/tiny-#{card.image_id}.png", :class => "cards size-tiny")
+              %td.name.card-tt{"data-name" => card.name, "data-card-id" => card.card_id}
+                = link_to(card.name, cards_store_path(card.card_id, card.name.parameterize))
+              %td.resource
+                != card.costs.map {|type| "#{content_tag(:div, "", :class => "resources resource-#{type} size-28")}#{content_tag(:span, "#{card["cost_#{type}"]}")}"}.join(" / ")
+
+              %td.rarity
+                %span{:class => "rarity-#{card.rarity}"}= t("rarities.#{card.rarity}")
+
+              - if card.store["buy"] and card.store["buy"]["total"] > 0
+                %td.price
+                  %span.gold
+                    #{number_with_delimiter(card.store["buy"]["min"])}#{t("gold_suffix")}
+                %td.quantity= number_with_delimiter(card.store["buy"]["total"])
+
+              - else
+                %td.quantity ---
+                %td.price ---
+
+              - if card.store["sell"] and card.store["sell"]["total"] > 0
+                %td.price
+                  %span.gold
+                    #{number_with_delimiter(card.store["sell"]["min"])}#{t("gold_suffix")}
+                %td.quantity= number_with_delimiter(card.store["sell"]["total"])
+
+              - else
+                %td.quantity ---
+                %td.price ---
+
+
+          - if @cards.empty?
+            %tr
+              %td{:colspan => 9}
+                %span.text-error= t(".no_cards_found")

@@ -1,0 +1,240 @@
+en:
+  long_version: "Version %{version}"
+  scroll_placeholder: Enter scroll name...
+  versions_prefix: "Versions:"
+  version_prefix: "Version:"
+  version: "%{version}"
+  contact_support_anytime: Feel free to {contact us} if you have any questions.
+  "yes": "Yes"
+  "no": "No"
+  first: First
+  previous: Previous
+  next: Next
+  last: Last
+  ago: ago
+  old: old
+  page: " (page %{page})"
+  gold_suffix: g
+  all: All
+  rarity: Rarity
+  resource: Resource
+  sort: Sort
+  type: Type
+  period: Period
+  and: and
+  version: "v%{version}"
+  live: Live
+
+  game_types:
+    "0": PvP Ranked
+    "1": PvP Unranked
+    "2": PvP Quickmatch
+    "3": AI Trial
+    "4": AI Quickmatch
+    "5": AI Tutorial
+
+  short_game_types:
+    "0": Ranked
+    "1": PvP Unranked
+    "2": PvP Quick
+    "3": AI Trial
+    "4": AI Quick
+    "5": AI Tutorial
+
+  stat_period:
+    h1: hour
+    d1: 24 hours
+    d3: 3 days
+    d7: 7 days
+    d14: 14 days
+    d30: 30 days
+
+  categories:
+    enchantment: Enchantment
+    spell: Spell
+    creature: Creature
+    structure: Structure
+    "0": Enchantment
+    "1": Spell
+    "2": Creature
+    "3": Structure
+
+  resources:
+    growth: Growth
+    order: Order
+    decay: Decay
+    energy: Energy
+
+  resource_abbrev:
+    growth: G
+    order: O
+    decay: D
+    energy: E
+
+  rarities:
+    common: Common
+    uncommon: Uncommon
+    rare: Rare
+    "0": Common
+    "1": Uncommon
+    "2": Rare
+
+  short_rarities:
+    common: Com
+    uncommon: Uncom
+    rare: Rare
+
+  errors:
+    invalid: "%{name} is invalid"
+
+  seconds:
+    one: 1 second
+    other: "%{count} seconds"
+
+  minutes:
+    one: 1 minute
+    other: "%{count} minutes"
+
+  seconds_short:
+    one: 1 sec
+    other: "%{count} secs"
+
+  minutes_short:
+    one: 1 min
+    other: "%{count} mins"
+
+  hours:
+    one: 1 hour
+    other: "%{count} hours"
+
+  hours_short:
+    one: 1 hr
+    other: "%{count} hrs"
+
+  days:
+    one: 1 day
+    other: "%{count} days"
+
+  providers:
+    google: Google
+    facebook: Facebook
+
+  page_errors:
+    must_login: You need to login before you can access that page.
+    logged_in: You are already logged in!
+
+  descriptions:
+    home: ScrollsPost gives you accurate card prices based off of real time in-game trade prices and an easily searchable card database.
+    faq: Frequently asked questions about ScrollsPost, how it works or how to access different features.
+    store: "%{name}'s ScrollsPost store, showing cards they are looking for our selling in-game."
+    replays: replays recorded by users in Scrolls
+    replays_rating: replays featuring users rated between %{min} - %{max} in Scrolls
+    replays_resources: replays featuring %{resources} decks in Scrolls
+    replays_resources_ratings: replays featuring %{min} - %{max} rated users with %{resources} decks in Scrolls
+    replay_rating: Rated %{min} - %{max}
+    replays_show: Replay of %{name1} vs %{name2} in a %{type} game.
+    replays_show_damage: Game graph of a %{type} match between %{name1} and %{name2}.
+    page: from page %{page}
+    replay_prefix: New
+    card_show: Full card details from resources to rules for %{name}, a %{resources} card.
+    card_show_version: Changes to %{name} from Scrolls v%{version}, a %{resources} card.
+    card_show_store: All of the users who have a %{name} card for sale or who want to buy one.
+    card_show_market: Market prices of %{name} over the last 7 days.
+    card_show_chat: In-game trade messages for %{name} and the prices people are selling or buying it for.
+    card_search: List of %{resources} cards on Scrolls.
+    pricing_default: Instantly updated market prices for all Scrolls card over the last %{period}.
+    chat: All trade chat messages from users how are trying to buy or sell cards with the prices.
+    stores: All the cards that are available for sale or they want to buy in-game.
+    deckbuilder: Easily build and show off your Scrolls decks to other players and get opinions on them.
+    stat_online: See how many players have been online in Scrolls over the last week.
+    stat_total_cards: See the rate at which new cards have been added to Scrolls through players buying boosters.
+    stat_total_sold: See the rate at which cards have been sold off to the shop in Scrolls.
+    stat_total_gold: View the total amount of gold earned in Scrolls by players.
+
+  titles:
+    deckbuilder: Deckbuilder
+    login: Login
+    replays_show: "%{name1} vs %{name2} (%{type})"
+    replays_show_damage: "%{name1} vs %{name2} (Game Graph)"
+    stores: User Stores
+    card_search: Card DB
+    card_show: "%{resources} Card"
+    card_show_version: "v%{version}, %{resources} Card"
+    card_show_market: Market Stats
+    card_show_store: User Stores
+    card_show_chat: Trade Chat
+    pricing_default: "Scroll Market Prices (Last %{period})"
+    chat: Trade Chat
+    faq: Frequently Asked Questions
+    news: News
+    user_cards: My Collection
+    news_page: News (page %{page})
+    register: Register
+    "404": Page Not Found (404)
+    "500": Server Error (500)
+    store: "%{name}'s Store"
+    account_management: Account Management
+    replays: Replays
+    replay_rating: Rated %{min} - %{max}
+    stat_online: Online Players Stats
+    stat_total_cards: Total Scrolls Stats
+    stat_total_sold: Scrolls Sold Stats
+    stat_total_gold: Gold earned Stats
+    patches: Scrolls Patch Notes
+
+  js:
+    dismiss: Dismiss
+    close: Close
+    ok: Ok
+    form_errors: Errors
+    contact_support: If you continue to have issues, you can contact us at {{email}}.
+    delete: Delete
+    cancel: Cancel
+    loading: Loading...
+    buy_units: Buy Units
+    sell_units: Sell Units
+    buy_price: Buy Price
+    sell_price: Sell Price
+    suggested_price: Suggested Price
+    pending_changes: Are you sure you want to leave? Your changes are being saved still.
+    round: Round
+    resources: Resources
+    damage_done: Damage Done
+    round: Round
+    none: None
+    atk: Atk
+    cd: CD
+    hp: HP
+    show_search: Show Search
+    hide_search: Hide Search
+    total: Total
+    gold_suffix: g
+
+    resource:
+      growth: Growth
+      energy: Energy
+      decay: Decay
+      order: Order
+
+    types:
+      "0": Enchantment
+      "1": Spell
+      "2": Creature
+      "3": Structure
+
+    request_error:
+      "500":
+        title: Critical Error
+        desc_1: Sorry, we had a critical error while loading your request.
+        desc_2: We've been notified about this and will get it fixed soon. Contact us at {{email}} if you have any further questions.
+      load:
+        title: Load Error
+        desc_1: Sorry, while loading your data we ran into a critical error.
+        desc_2: Please contact {{email}} and will quickly get it sorted out.
+
+  mongo_mapper:
+    attributes:
+      scroll_account:
+        channel: In-Game Channel
+        steam_name: Steam Name
+        public: Public?

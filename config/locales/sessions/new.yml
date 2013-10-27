@@ -1,0 +1,12 @@
+en:
+  sessions:
+    new:
+      login: Login
+      logging_in: Logging In
+      login_info_1: Login to ScrollsPost using your existing account you created on {ScrollsPost.com} or through our {in-game Scrolls mod}.
+      login_info_2: Don't have an account yet? {Register} one now, it only takes a minute.
+      email_invalid: No account found by that email.
+      password_invalid: Is incorrect.
+      password: Password
+      email: Email
+      data_bad: Invalid data

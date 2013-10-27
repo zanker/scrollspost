@@ -1,0 +1,59 @@
+en:
+  faq:
+    index:
+      faq: Frequently Asked Questions
+      faqs:
+        "1":
+          title: How do I get pricing data inside or collection syncing inside Scrolls?
+          msg_0: Our ScrollsPost mod for {Summoner} adds pricing data inside of the trade window, as well as a quick /pc <name> to check prices.
+          msg_1: In addition, to speed up finding people to sell cards to, or find cards to buy, we now offer collection syncing inside of the ScrollsPost mod.
+          msg_2: If you already have the mod, just type /scrollspost in-game and click "ScrollsPost Authentication", setup or login to an account and you will automatically get collection syncing.
+          msg_3: If you don't have the mod yet, you will need to install {Summoner}, then go to the "Mods" option in-game, click "Add Repository" and enter "http://mods.scrollspost.com", click the ScrollsPost repository and install "Official-ScrollsPost".
+
+        "2":
+          title: How do I watch replays?
+          msg_0: Our ScrollsPost mod for {Summoner} adds both replay watching and syncing features. As well as other features you can see in question above.
+          msg_1: With the mod, you either have an option after each game to automatically upload a replay, or to just always automatically upload them.
+          msg_2: They will then be available for linking and downloading on this site. Allowing you to easily share your game or track your progress.
+          msg_3: Type /scrollspost (or /sp) and go to "Replay List" to view your replays, or ones you downloaded.
+
+        "3":
+          title: How do I get faster mod updates?
+          msg_0: You can now use our ScrollsPost mod repo through Summoner to get instant updates to the mod. Giving you quicker access to new features and bug fixes.
+          msg_1: All you need to do is login to Scrolls, click "Mods" and then "Add Repository", enter "http://mods.scrollspost.com" and select the ScrollsPost repository, then install "Official-ScrollsPost".
+          msg_2: If you already installed the mod through the ScrollsGuide repo, you will need to migrate your replays over. You can find info on migrating your replays {here}.
+
+        "4":
+          title: What is a replay viewpoint?
+          msg_0: The ScrollsPost mod supports viewpoints from both players point of view, letting you see what hand both sides had throughout the game.
+          msg_1: No merging or any other tricks are required, all you need are both replays (white and black). If you have a replay named "4066803-white.spr" you need "4066803-black.spr" in the same directory as the "4066803-white.spr" file.
+          msg_2: Then just watch the replay in-game and the mod will automatically switch viewpoints for each turn.
+          msg_3: You do not need both the white and black replay to watch it, but you will only get to see the hand of the person who recorded it.
+
+        "5":
+          title: Where does the data come from?
+          msg_0: We pull live chat data from WTB, WTS, Trading and Trading 1 through 30 in-game using our bot ScrollsPost.
+          msg_1: It's then processed to extract pricing data, card, quantity and what it is (buy or sell) and stored in our system to be analyzed to determine prices.
+          msg_2: Roughly 60 messages are parsed per minute, with an accuracy of 50 - 55 messages. Meaning we can successfully extract pricing data from about 90%-95% of the messages we see.
+
+        "6":
+          title: How do you prevent abuse?
+          msg_0: We have a couple of different ways of stopping abuse. Because Scrolls costs money for an account, we can use player names to reduce the potential for abuse.
+          msg_1: We only allow one price point/scroll/hour. This means a bot spamming 24/7 only contributes about 2% of the data points over a day, on top of the other protections against price manipulation.
+          msg_2: In addition, the top 5% of sells and bottom 5% of buys prices are removed, as well as any prices drastically outside the normal ranges.
+          msg_3: We're always on the lookout for abuse and are constantly improving our filters. The raw price data is stored so we're always able to recalculate prices if there are any issues that may popup later.
+
+        "7":
+          title: How often do you update?
+          msg_0: Data is constantly being pulled in, the time from a message being seen in chat to it being logged in the database is only a few seconds.
+          msg_1: Price calculations are done based on the time period. 1 hour prices are updated once every 30 seconds, 24 hours every 30 minutes, 3 days once an hour, 7 days once every 3 hours, 14 days every 6 hours and 30 days every 12 hours.
+
+        "8":
+          title: Where does the card data come from?
+          msg_0: Cards are automatically updates once every 30 minutes or so and will always be the latest version reflected by Scrolls.
+
+        "9":
+          title: What is suggested price?
+          msg_0: Suggested price is the average of the buy and sell price and is what we suggest you buy or sell cards at.
+          msg_1: Generally people who are buying an item will try and buy a little cheaper, and sellers will try and get a little more gold.
+          msg_2: Which is why we think that the suggested price is the "real" price of a card. You can price it however you want, but if you try and sell it outside the buy and sell ranges, you might have a hard time finding someone.

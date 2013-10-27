@@ -1,0 +1,1 @@
+Scrollspost::Application.config.session_store :cookie_store, :key => '_scrollspost_session', :httponly => true

@@ -1,0 +1,45 @@
+.row
+  .span12
+    .well.well-small.well-trimmed
+      %p.emph= t(".live_chat")
+
+.row
+  .span12
+    %table.table.table-bordered.table-hover.table-striped
+      %thead
+        %tr
+          %th.icon
+          %th.name= t(".name")
+          %th.resource= t(".cost")
+          %th.rarity= t(".rarity")
+          %th.type= t(".type")
+          %th.channel= t(".channel")
+          %th.user= t(".user")
+          %th.price= t(".price")
+          %th.age= t(".age")
+
+      %tbody
+        - @trade_chat.each do |chat|
+          - card = @cards[chat[:card_id]]
+          %tr
+            %td.icon
+              = image_tag("cards/tiny-#{card.image_id}.png", :class => "cards size-tiny")
+            %td.name.card-tt{"data-name" => card.name, "data-card-id" => card.card_id}
+              = link_to(card.name, cards_chat_path(card.card_id, card.name.parameterize))
+            %td.resource
+              != card.costs.map {|type| "#{content_tag(:div, "", :class => "resources resource-#{type} size-28")}#{content_tag(:span, "#{card["cost_#{type}"]}")}"}.join(" / ")
+
+            %td.rarity
+              %span{:class => "rarity-#{card.rarity}"}= t("rarities.#{card.rarity}")
+
+            %td.type= chat[:flag] == CardPriceHistory::BUY ? t(".wtb") : t(".wts")
+            %td.channel= chat[:room]
+            %td.user= chat[:from]
+            %td.price.gold
+              #{number_with_delimiter(chat[:price])}#{t("gold_suffix")}
+            %td.age= relative_time(chat[:created_at], :short)
+
+        - if @trade_chat.empty?
+          %tr
+            %td{:colspan => 9}
+              %span.text-error= t(".none_found")

@@ -1,0 +1,138 @@
+= render_block("show_base") do
+  .span6#info
+    - if @game_version
+      %h4.gold= t(".card_old", :version => @game_version)
+      %p= t(".viewing_old", :name => @card.name, :version => @game_version)
+    - else
+      %h4.gold= t(".card_live")
+
+    .well.well-small.well-trimmed
+      %ul
+        %li
+          .label= t(".name")
+          .text= render_card_data(:name)
+
+        %li
+          .label= t(".resource")
+          .text
+            != render_card_data(:costs) do |card|
+              != card.costs.map {|type| link_to(t("resources.#{type}"), cards_index_search_path(:resources => type))}.join(", ")
+
+        %li
+          .label= t(".rarity")
+          .text
+            != render_card_data(:rarity) do |card|
+              %span{:class => "rarity-#{card.rarity}"}= t("rarities.#{card.rarity}")
+
+        %li
+          .label= t(".cost")
+          .text
+            != render_card_data(:costs) do |card|
+              != card.costs.map {|type| "#{content_tag(:div, "", :class => "resources resource-#{type} size-16")}#{content_tag(:span, "#{card["cost_#{type}"]}")}"}.join(" / ")
+
+        %li
+          .label= t(".type")
+          .text
+            != render_card_data(:category) do |card|
+              = link_to(t("categories.#{card.category}"), cards_index_search_path(:category => Card::REVERSE_CATEGORY_MAP[card.category]))
+
+        %li
+          .label= t(".sub_type")
+          .text
+            != render_card_data(:types) do |card|
+              = card.types.empty? ? t(".none") : card.types.join(", ")
+
+        %li
+          .label= t(".attack")
+          .text
+            != render_card_data(:attack) do |card|
+              = card.has_stats? ? number_with_delimiter(card.attack > 0 ? card.attack : 0) : "--"
+
+        %li
+          .label= t(".cooldown")
+          .text
+            != render_card_data(:cooldown) do |card|
+              = card.has_stats? ? number_with_delimiter(card.cooldown > 0 ? card.cooldown : 0) : "--"
+
+        %li
+          .label= t(".health")
+          .text
+            != render_card_data(:hp) do |card|
+              = card.has_stats? ? number_with_delimiter(card.hp > 0 ? card.hp : 0) : "--"
+
+        - if @card_data.passive_rule_ids?
+          %li
+            .label= t(".rules")
+            .text
+              != render_card_data(:passive_rule_ids) do |card|
+                != card.passive_rule_ids.map {|rule_id| link_to(@rules[rule_id].name.titleize, cards_index_search_path(:rule => @rules[rule_id].slug), :class => "tt", :title => @rules[rule_id].desc)}.join(", ")
+
+        %li
+          .label= t(".target_type")
+          .text
+            != render_card_data(:target) do |card|
+              - if card.target.blank?
+                = t(".none")
+              - else
+                = t(".targets.#{card.target}", :default => card.target)
+                \-
+                = t(".targets_desc.#{card.target}", :default => t(".target_unknown"))
+
+        %li
+          .label= t(".desc")
+          .text
+            != render_card_data(:desc) do |card|
+              = card.desc? ? card.desc : t(".none")
+
+        %li
+          .label= t(".flavor")
+          .text
+            != render_card_data(:flavor) do |card|
+              != card.flavor? ? card.flavor.gsub('\n', "<br>") : t(".none")
+
+        - if @live_card and @live_card._id != @card_data._id
+          %li
+            .label= t(".card_image")
+            .text
+              - if @live_card.image_id != @card_data.image_id
+                %span.text-error= t(".changed")
+              - else
+                %span= t(".no_change")
+
+          %li
+            .label= t(".animation")
+            .text
+              - if @live_card.anim_bundle_id != @card_data.anim_bundle_id or @live_card.anim_prev_img_id != @card_data.anim_prev_img_id or @live_card.anim_prev_info != @card_data.anim_prev_info
+                %span.text-error= t(".changed")
+              - else
+                %span= t(".no_change")
+
+  .span2#history
+    %h4.gold= t(".history")
+    %table.table.table-bordered.table-hover.table-striped
+      %thead
+        %tr
+          %th.version= t(".version")
+          %th.changes= t(".changes")
+          %th.view= t(".view")
+      %tbody
+        - if @history.empty?
+          %tr
+            %td{:colspan => 3}= t(".no_changes", :name => @card.name)
+
+        - else
+          %tr
+            %td.version= t(".live")
+            %td.changes --
+            %td.view= params[:version].blank? ? t(".view") : link_to(t(".view"), url_for(:version => nil))
+
+          - @history.each do |row|
+            - version = row[:game_version].parameterize
+            %tr
+              %td.version= row[:game_version]
+              %td.changes= number_with_delimiter(row[:total_changes])
+              %td.view= params[:version] == version ? t(".view") : link_to(t(".view"), url_for(:version => version))
+
+
+
+  .clearfix
